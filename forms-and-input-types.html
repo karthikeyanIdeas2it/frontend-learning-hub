@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms and Input Types — Learning Hub</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>HTML Forms and Input Types</h1>
+        <p>
+            A beginner-to-advanced learning resource for HTML5 forms.
+            This page covers every concept from basic form structure to senior-level understanding and interview readiness.
+            Study the source code — every example is written directly in HTML.
+        </p>
+        <p><strong>Scope:</strong> HTML5 only. No CSS, no JavaScript, no frameworks, no external resources.</p>
+    </header>
+
+    <nav>
+        <h2>Contents</h2>
+        <ol>
+            <li><a href="#intro">Introduction to HTML Forms</a></li>
+            <li><a href="#basic-elements">Basic Form Elements</a></li>
+            <li><a href="#input-types">Input Types</a></li>
+            <li><a href="#attributes">Important Input Attributes</a></li>
+            <li><a href="#labels">Labels and Form Controls</a></li>
+            <li><a href="#checkbox-radio">Checkbox and Radio Button Groups</a></li>
+            <li><a href="#select-datalist">Select, Option, Optgroup and Datalist</a></li>
+            <li><a href="#file-input">File Input</a></li>
+            <li><a href="#validation">HTML Form Validation</a></li>
+            <li><a href="#advanced-validation">Advanced Form Validation Concepts</a></li>
+            <li><a href="#advanced-attributes">Advanced Form Attributes</a></li>
+            <li><a href="#submission">Form Submission</a></li>
+            <li><a href="#mistakes">Common HTML Form Mistakes</a></li>
+            <li><a href="#complete-form">Complete Job Application Form</a></li>
+            <li><a href="#accessibility">Form Accessibility Fundamentals</a></li>
+            <li><a href="#senior-concepts">Senior Frontend Form Concepts</a></li>
+            <li><a href="#interview">Interview Questions</a></li>
+            <li><a href="#checklist">Final Learning Checklist</a></li>
+        </ol>
+    </nav>
+
+    <main>
+
+        <!-- ============================================================
+             SECTION 1 — INTRODUCTION
+        ============================================================ -->
+        <section id="intro">
+            <h2>1. Introduction to HTML Forms</h2>
+
+            <article>
+                <h3>What Is an HTML Form?</h3>
+                <p>
+                    An HTML form is a section of a webpage that collects input from the user and sends it to a server (or processes it on the client).
+                    Forms are the primary mechanism for user interaction on the web — login pages, signup pages, search boxes, and checkout pages are all forms.
+                </p>
+            </article>
+
+            <article>
+                <h3>Why Are Forms Needed?</h3>
+                <p>
+                    Static HTML pages only display information. Forms make pages interactive by allowing users to
+                    submit data — credentials, search terms, orders, job applications, and more.
+                    Without forms, a user cannot send information to a server.
+                </p>
+            </article>
+
+            <article>
+                <h3>How Forms Collect User Input</h3>
+                <p>
+                    A form groups together <strong>form controls</strong> — elements like <code>&lt;input&gt;</code>,
+                    <code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code>.
+                    When the user submits the form, the browser collects all control values and sends them as
+                    <strong>name/value pairs</strong> to the address specified in the <code>action</code> attribute.
+                </p>
+            </article>
+
+            <article>
+                <h3>Basic &lt;form&gt; Structure</h3>
+                <pre><code>&lt;form action="/submit-application" method="post"&gt;
+    &lt;label for="fullname"&gt;Full Name&lt;/label&gt;
+    &lt;input type="text" id="fullname" name="fullname"&gt;
+
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>The action Attribute</h3>
+                <p>
+                    <code>action</code> specifies the URL that processes the form data. If omitted, the form submits to the current page URL.
+                </p>
+                <pre><code>&lt;form action="/apply"&gt;...&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>The method Attribute — GET vs POST</h3>
+                <p>
+                    <code>method</code> controls how data is sent. Two values are relevant in HTML:
+                </p>
+                <ul>
+                    <li>
+                        <strong>GET</strong> — data is appended to the URL as a query string.
+                        Example: <code>/search?keyword=java&amp;location=bangalore</code>
+                        Use for searches and filters where the URL should be bookmarkable and shareable.
+                    </li>
+                    <li>
+                        <strong>POST</strong> — data is sent in the request body, not visible in the URL.
+                        Use for login, registration, file upload, or any sensitive or large data.
+                    </li>
+                </ul>
+                <pre><code>&lt;form action="/search" method="get"&gt;
+    &lt;input type="search" name="keyword"&gt;
+    &lt;button type="submit"&gt;Search&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;form action="/apply" method="post"&gt;
+    &lt;input type="email" name="email"&gt;
+    &lt;button type="submit"&gt;Apply&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <aside>
+                    <p><strong>Rule:</strong> Use <code>GET</code> for read/search operations. Use <code>POST</code> for write/create/sensitive operations.</p>
+                </aside>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 2 — BASIC FORM ELEMENTS
+        ============================================================ -->
+        <section id="basic-elements">
+            <h2>2. Basic Form Elements</h2>
+
+            <article>
+                <h3>&lt;form&gt;</h3>
+                <p><strong>What:</strong> The container for all form controls.</p>
+                <p><strong>Why:</strong> Groups controls together and defines how data is submitted.</p>
+                <p><strong>When:</strong> Whenever you need to collect and submit user data.</p>
+                <pre><code>&lt;form action="/apply" method="post"&gt;
+    &lt;!-- controls go here --&gt;
+&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;input&gt;</h3>
+                <p><strong>What:</strong> The most versatile form element. Its behavior is controlled by the <code>type</code> attribute.</p>
+                <p><strong>Why:</strong> Handles text, email, password, checkbox, radio, file, date, and many more input types.</p>
+                <p><strong>When:</strong> For any single-value user input.</p>
+                <pre><code>&lt;input type="text" name="fullname" placeholder="Enter your full name"&gt;
+&lt;input type="email" name="email" placeholder="you@example.com"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;label&gt;</h3>
+                <p><strong>What:</strong> Provides a visible text description for a form control.</p>
+                <p><strong>Why:</strong> Associates a text description with a control so users know what to enter. Clicking the label focuses the associated input.</p>
+                <p><strong>When:</strong> Always — every interactive form control should have a label.</p>
+                <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;button&gt;</h3>
+                <p><strong>What:</strong> A clickable button within a form.</p>
+                <p><strong>Why:</strong> Triggers form actions — submission or reset.</p>
+                <p><strong>When:</strong> For submit and reset actions, or standalone buttons.</p>
+                <pre><code>&lt;button type="submit"&gt;Submit Application&lt;/button&gt;
+&lt;button type="reset"&gt;Clear Form&lt;/button&gt;
+&lt;button type="button"&gt;Save Draft&lt;/button&gt;</code></pre>
+                <aside>
+                    <p><strong>Important:</strong> A <code>&lt;button&gt;</code> inside a <code>&lt;form&gt;</code> without an explicit <code>type</code> defaults to <code>type="submit"</code>. Always specify the type.</p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>&lt;textarea&gt;</h3>
+                <p><strong>What:</strong> A multi-line text input field.</p>
+                <p><strong>Why:</strong> Allows users to enter longer text such as cover letters or descriptions.</p>
+                <p><strong>When:</strong> For multi-line text — cover letters, comments, notes.</p>
+                <pre><code>&lt;label for="cover-letter"&gt;Cover Letter&lt;/label&gt;
+&lt;textarea id="cover-letter" name="cover_letter" rows="6" cols="50"&gt;&lt;/textarea&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;select&gt;, &lt;option&gt;, &lt;optgroup&gt;</h3>
+                <p><strong>What:</strong> A dropdown menu with predefined choices.</p>
+                <p><strong>Why:</strong> Restricts input to a fixed set of valid options.</p>
+                <p><strong>When:</strong> For a known, finite list of choices — job type, department, country.</p>
+                <pre><code>&lt;label for="job-type"&gt;Employment Type&lt;/label&gt;
+&lt;select id="job-type" name="job_type"&gt;
+    &lt;optgroup label="Full Time"&gt;
+        &lt;option value="ft-onsite"&gt;Full Time Onsite&lt;/option&gt;
+        &lt;option value="ft-remote"&gt;Full Time Remote&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Part Time"&gt;
+        &lt;option value="pt-contract"&gt;Contract&lt;/option&gt;
+        &lt;option value="pt-freelance"&gt;Freelance&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;fieldset&gt; and &lt;legend&gt;</h3>
+                <p><strong>What:</strong> <code>&lt;fieldset&gt;</code> groups related form controls. <code>&lt;legend&gt;</code> provides a caption for the group.</p>
+                <p><strong>Why:</strong> Organises large forms into logical sections, making them easier to understand.</p>
+                <p><strong>When:</strong> When a form has distinct sections — personal info, professional info, etc.</p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    &lt;label for="fn"&gt;Full Name&lt;/label&gt;
+    &lt;input type="text" id="fn" name="full_name"&gt;
+&lt;/fieldset&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;datalist&gt;</h3>
+                <p><strong>What:</strong> Provides a list of predefined suggestions for an <code>&lt;input&gt;</code>. The user can pick a suggestion or type their own value.</p>
+                <p><strong>Why:</strong> Gives autocomplete-like suggestions without restricting the user to a fixed list.</p>
+                <p><strong>When:</strong> For job titles, city names, skill tags — where suggestions help but free input is still allowed.</p>
+                <pre><code>&lt;label for="job-title"&gt;Job Title&lt;/label&gt;
+&lt;input type="text" id="job-title" name="job_title" list="titles"&gt;
+&lt;datalist id="titles"&gt;
+    &lt;option value="Java Developer"&gt;
+    &lt;option value="React Developer"&gt;
+    &lt;option value="Full Stack Developer"&gt;
+&lt;/datalist&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;output&gt;</h3>
+                <p><strong>What:</strong> Represents the result of a calculation or user action.</p>
+                <p><strong>Why:</strong> Semantically marks a value that is a computed result, not a direct user input.</p>
+                <p><strong>When:</strong> When displaying a computed value within a form — e.g., a salary estimate derived from a range slider.</p>
+                <pre><code>&lt;output name="salary_display" for="salary"&gt;50000&lt;/output&gt;</code></pre>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 3 — INPUT TYPES
+        ============================================================ -->
+        <section id="input-types">
+            <h2>3. Input Types</h2>
+            <p>The <code>type</code> attribute controls the behavior, validation, and UI of an <code>&lt;input&gt;</code>.</p>
+
+            <article>
+                <h3>type="text"</h3>
+                <p><strong>Purpose:</strong> Single-line plain text input. The default if <code>type</code> is omitted.</p>
+                <p><strong>Job Portal use:</strong> Full Name, Job Title.</p>
+                <p><strong>Key attributes:</strong> <code>maxlength</code>, <code>minlength</code>, <code>pattern</code>, <code>placeholder</code></p>
+                <pre><code>&lt;label for="fullname"&gt;Full Name&lt;/label&gt;
+&lt;input type="text" id="fullname" name="full_name" required maxlength="100"&gt;</code></pre>
+                <p><strong>Common mistake:</strong> Using <code>type="text"</code> for email or phone — use the specific type instead.</p>
+            </article>
+
+            <article>
+                <h3>type="email"</h3>
+                <p><strong>Purpose:</strong> Single-line input validated as an email address by the browser.</p>
+                <p><strong>Job Portal use:</strong> Applicant email address.</p>
+                <p><strong>Key attributes:</strong> <code>required</code>, <code>multiple</code></p>
+                <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input type="email" id="email" name="email" required&gt;</code></pre>
+                <p><strong>Note:</strong> Browser validation checks for a basic <code>@</code> format but does not verify the email exists.</p>
+            </article>
+
+            <article>
+                <h3>type="password"</h3>
+                <p><strong>Purpose:</strong> Text input that masks the characters.</p>
+                <p><strong>Job Portal use:</strong> Account login password.</p>
+                <p><strong>Key attributes:</strong> <code>minlength</code>, <code>maxlength</code>, <code>required</code></p>
+                <pre><code>&lt;label for="pwd"&gt;Password&lt;/label&gt;
+&lt;input type="password" id="pwd" name="password" minlength="8" required&gt;</code></pre>
+                <p><strong>Common mistake:</strong> Relying on masking for security — always hash passwords server-side.</p>
+            </article>
+
+            <article>
+                <h3>type="number"</h3>
+                <p><strong>Purpose:</strong> Numeric input with optional step, min, and max constraints.</p>
+                <p><strong>Job Portal use:</strong> Years of experience, expected salary.</p>
+                <p><strong>Key attributes:</strong> <code>min</code>, <code>max</code>, <code>step</code></p>
+                <pre><code>&lt;label for="exp"&gt;Years of Experience&lt;/label&gt;
+&lt;input type="number" id="exp" name="experience" min="0" max="50" step="1"&gt;</code></pre>
+                <p><strong>Common mistake:</strong> Using <code>type="number"</code> for phone numbers, zip codes, or credit cards — these are not numeric quantities and should use <code>type="tel"</code> or <code>type="text"</code> with a <code>pattern</code>.</p>
+            </article>
+
+            <article>
+                <h3>type="tel"</h3>
+                <p><strong>Purpose:</strong> Phone number input. Does not validate format on its own — use <code>pattern</code> for validation.</p>
+                <p><strong>Job Portal use:</strong> Contact phone number.</p>
+                <p><strong>Key attributes:</strong> <code>pattern</code>, <code>placeholder</code></p>
+                <pre><code>&lt;label for="phone"&gt;Phone Number&lt;/label&gt;
+&lt;input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="9876543210"&gt;</code></pre>
+                <p><strong>Why not type="number"?</strong> Phone numbers can start with 0, may have country codes, and should not be treated as a mathematical quantity.</p>
+            </article>
+
+            <article>
+                <h3>type="url"</h3>
+                <p><strong>Purpose:</strong> URL input with browser validation for a valid URL format.</p>
+                <p><strong>Job Portal use:</strong> Portfolio URL, LinkedIn profile.</p>
+                <pre><code>&lt;label for="portfolio"&gt;Portfolio URL&lt;/label&gt;
+&lt;input type="url" id="portfolio" name="portfolio_url" placeholder="https://yourportfolio.com"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="search"</h3>
+                <p><strong>Purpose:</strong> A text input styled and behaved as a search field. May show a clear button in some browsers.</p>
+                <p><strong>Job Portal use:</strong> Job search bar.</p>
+                <pre><code>&lt;label for="job-search"&gt;Search Jobs&lt;/label&gt;
+&lt;input type="search" id="job-search" name="keyword" placeholder="Java Developer"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="date"</h3>
+                <p><strong>Purpose:</strong> Date picker. Value is always in <code>YYYY-MM-DD</code> format.</p>
+                <p><strong>Job Portal use:</strong> Available joining date.</p>
+                <p><strong>Key attributes:</strong> <code>min</code>, <code>max</code></p>
+                <pre><code>&lt;label for="joining"&gt;Available From&lt;/label&gt;
+&lt;input type="date" id="joining" name="joining_date" min="2026-01-01"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="time"</h3>
+                <p><strong>Purpose:</strong> Time picker in <code>HH:MM</code> format.</p>
+                <p><strong>Job Portal use:</strong> Preferred interview time.</p>
+                <pre><code>&lt;label for="pref-time"&gt;Preferred Interview Time&lt;/label&gt;
+&lt;input type="time" id="pref-time" name="preferred_time"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="datetime-local"</h3>
+                <p><strong>Purpose:</strong> Combined date and time picker in local time (no timezone info).</p>
+                <pre><code>&lt;label for="interview-dt"&gt;Interview Date and Time&lt;/label&gt;
+&lt;input type="datetime-local" id="interview-dt" name="interview_datetime"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="month"</h3>
+                <p><strong>Purpose:</strong> Selects a month and year. Value format: <code>YYYY-MM</code>.</p>
+                <pre><code>&lt;label for="start-month"&gt;Start Month&lt;/label&gt;
+&lt;input type="month" id="start-month" name="start_month"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="week"</h3>
+                <p><strong>Purpose:</strong> Selects a week number and year. Value format: <code>YYYY-Www</code>.</p>
+                <pre><code>&lt;label for="sprint-week"&gt;Sprint Week&lt;/label&gt;
+&lt;input type="week" id="sprint-week" name="sprint_week"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="checkbox"</h3>
+                <p><strong>Purpose:</strong> A toggle — checked or unchecked. Multiple checkboxes allow multiple selections.</p>
+                <p><strong>Job Portal use:</strong> Skills selection.</p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Skills&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="java"&gt; Java&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="react"&gt; React&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="spring"&gt; Spring Boot&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="radio"</h3>
+                <p><strong>Purpose:</strong> One selection from a group. All radio buttons with the same <code>name</code> form a group — only one can be selected.</p>
+                <p><strong>Job Portal use:</strong> Experience level.</p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="junior"&gt; Junior&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="mid"&gt; Mid-level&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="senior"&gt; Senior&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="file"</h3>
+                <p><strong>Purpose:</strong> Allows the user to select one or more files from their device.</p>
+                <p><strong>Job Portal use:</strong> Resume upload.</p>
+                <p><strong>Key attributes:</strong> <code>accept</code>, <code>multiple</code></p>
+                <pre><code>&lt;label for="resume"&gt;Resume (PDF or DOC)&lt;/label&gt;
+&lt;input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="range"</h3>
+                <p><strong>Purpose:</strong> A slider for selecting a numeric value within a range.</p>
+                <p><strong>Job Portal use:</strong> Expected salary range.</p>
+                <pre><code>&lt;label for="salary"&gt;Expected Salary (LPA)&lt;/label&gt;
+&lt;input type="range" id="salary" name="expected_salary" min="3" max="50" step="1" value="10"&gt;
+&lt;output for="salary"&gt;10&lt;/output&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="color"</h3>
+                <p><strong>Purpose:</strong> A color picker. Value is a hex color string like <code>#ff0000</code>.</p>
+                <pre><code>&lt;label for="theme"&gt;Preferred Theme Color&lt;/label&gt;
+&lt;input type="color" id="theme" name="theme_color" value="#0066cc"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type="hidden"</h3>
+                <p><strong>Purpose:</strong> An invisible field that submits a value without user interaction.</p>
+                <p><strong>When:</strong> Passing context data like a CSRF token, record ID, or page version.</p>
+                <pre><code>&lt;input type="hidden" name="job_id" value="JOB-2026-001"&gt;</code></pre>
+                <aside>
+                    <p><strong>Security warning:</strong> Hidden fields are visible in the page source and can be modified. Never rely on them for security.</p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>type="submit"</h3>
+                <p><strong>Purpose:</strong> A button that submits the form.</p>
+                <pre><code>&lt;input type="submit" value="Submit Application"&gt;</code></pre>
+                <p>Prefer <code>&lt;button type="submit"&gt;</code> — it allows HTML content inside the button.</p>
+            </article>
+
+            <article>
+                <h3>type="reset"</h3>
+                <p><strong>Purpose:</strong> Resets all form controls to their default values.</p>
+                <pre><code>&lt;input type="reset" value="Clear Form"&gt;</code></pre>
+                <p><strong>Caution:</strong> Users rarely expect a reset button. It can cause accidental data loss. Use sparingly.</p>
+            </article>
+
+            <article>
+                <h3>type="button"</h3>
+                <p><strong>Purpose:</strong> A button with no default action. Does nothing without JavaScript — but is still needed to prevent accidental form submission.</p>
+                <pre><code>&lt;input type="button" value="Save Draft"&gt;</code></pre>
+                <p>Prefer <code>&lt;button type="button"&gt;</code> for the same reason as above.</p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 4 — IMPORTANT ATTRIBUTES
+        ============================================================ -->
+        <section id="attributes">
+            <h2>4. Important Input Attributes</h2>
+
+            <article>
+                <h3>id</h3>
+                <p>Uniquely identifies an element on the page. Used to associate a <code>&lt;label&gt;</code> with its input via <code>for</code>.</p>
+                <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email" name="email"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>name</h3>
+                <p>The key in the name/value pair that is sent when the form is submitted. Without <code>name</code>, the control's value is not submitted.</p>
+                <pre><code>&lt;input type="text" name="full_name"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>id vs name</h3>
+                <ul>
+                    <li><strong>id</strong> — used in HTML to link labels, target anchors, and reference elements. It identifies the element within the page.</li>
+                    <li><strong>name</strong> — used during form submission. It is the key sent to the server. It has no role in linking labels.</li>
+                    <li>They can be the same string, but they serve completely different purposes.</li>
+                </ul>
+                <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" name="user_email"&gt;</code></pre>
+                <p>Here <code>id="email"</code> links the label, while <code>name="user_email"</code> is the key submitted to the server.</p>
+            </article>
+
+            <article>
+                <h3>value</h3>
+                <p>Sets the initial value of the control or the value submitted for checkboxes and radio buttons.</p>
+                <pre><code>&lt;input type="text" name="city" value="Bangalore"&gt;
+&lt;input type="radio" name="level" value="senior"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type</h3>
+                <p>Defines the kind of input control. Controls validation, keyboard type, and UI widget.</p>
+            </article>
+
+            <article>
+                <h3>placeholder</h3>
+                <p>Shows hint text inside the input field when it is empty. Disappears when the user starts typing.</p>
+                <pre><code>&lt;input type="text" name="full_name" placeholder="e.g. Karthikeyan C"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>placeholder vs label</h3>
+                <ul>
+                    <li><strong>placeholder</strong> — disappears when you start typing. It is a hint, not a label. Relying on it as a label harms usability.</li>
+                    <li><strong>label</strong> — always visible, even when the field has content. Describes the field permanently.</li>
+                </ul>
+                <p><strong>Rule:</strong> Always use a <code>&lt;label&gt;</code>. Use <code>placeholder</code> only as an additional hint.</p>
+            </article>
+
+            <article>
+                <h3>required</h3>
+                <p>Marks the field as mandatory. The browser blocks submission if the field is empty.</p>
+                <pre><code>&lt;input type="email" name="email" required&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>disabled</h3>
+                <p>Makes the control uninteractive and its value is <strong>not submitted</strong> with the form.</p>
+                <pre><code>&lt;input type="text" name="employee_id" value="EMP-001" disabled&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>readonly</h3>
+                <p>The field is visible and its value <strong>is submitted</strong>, but the user cannot change it.</p>
+                <pre><code>&lt;input type="text" name="job_ref" value="JOB-2026-001" readonly&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>disabled vs readonly</h3>
+                <ul>
+                    <li><strong>disabled</strong> — control is inactive, not focusable, and value is NOT submitted.</li>
+                    <li><strong>readonly</strong> — control is focusable, value IS submitted, but the user cannot edit it.</li>
+                </ul>
+                <p>Use <code>readonly</code> when you want to show a value and submit it but not let the user change it. Use <code>disabled</code> when the field should be completely inactive.</p>
+            </article>
+
+            <article>
+                <h3>autocomplete</h3>
+                <p>Controls whether the browser should offer autocomplete suggestions. Common values: <code>on</code>, <code>off</code>, <code>email</code>, <code>name</code>, <code>tel</code>.</p>
+                <pre><code>&lt;input type="email" name="email" autocomplete="email"&gt;
+&lt;input type="password" name="password" autocomplete="new-password"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>autofocus</h3>
+                <p>Automatically focuses the control when the page loads. Use on the primary input field of the page.</p>
+                <pre><code>&lt;input type="search" name="keyword" autofocus&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>multiple</h3>
+                <p>Allows selecting multiple values. Used with <code>type="file"</code>, <code>type="email"</code>, and <code>&lt;select&gt;</code>.</p>
+                <pre><code>&lt;input type="file" name="documents" multiple&gt;
+&lt;select name="skills" multiple&gt;...&lt;/select&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>checked</h3>
+                <p>Sets a checkbox or radio button as selected by default.</p>
+                <pre><code>&lt;input type="checkbox" name="agree" value="yes" checked&gt;
+&lt;input type="radio" name="level" value="mid" checked&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>min, max, step</h3>
+                <p>Used with numeric and date inputs. <code>min</code> and <code>max</code> set boundaries. <code>step</code> sets the increment.</p>
+                <pre><code>&lt;input type="number" name="experience" min="0" max="50" step="1"&gt;
+&lt;input type="date" name="joining_date" min="2026-01-01" max="2027-12-31"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>minlength, maxlength</h3>
+                <p>Used with text-based inputs. Controls the minimum and maximum number of characters allowed.</p>
+                <pre><code>&lt;input type="password" name="password" minlength="8" maxlength="64"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>min/max vs minlength/maxlength</h3>
+                <ul>
+                    <li><strong>min/max</strong> — constrain numeric or date values. Example: experience between 0 and 50 years.</li>
+                    <li><strong>minlength/maxlength</strong> — constrain the character count of text. Example: password between 8 and 64 characters.</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>pattern</h3>
+                <p>A regular expression that the control's value must match for the form to be valid.</p>
+                <pre><code>&lt;input type="tel" name="phone" pattern="[0-9]{10}" placeholder="10-digit number"&gt;</code></pre>
+                <p><strong>Note:</strong> Use pattern only when built-in types do not cover the required validation.</p>
+            </article>
+
+            <article>
+                <h3>list</h3>
+                <p>Links an <code>&lt;input&gt;</code> to a <code>&lt;datalist&gt;</code> by its <code>id</code>.</p>
+                <pre><code>&lt;input type="text" name="job_title" list="job-titles"&gt;
+&lt;datalist id="job-titles"&gt;
+    &lt;option value="React Developer"&gt;
+&lt;/datalist&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>accept</h3>
+                <p>Used with <code>type="file"</code> to hint acceptable file types. This filters the file picker dialog but does NOT validate the file server-side.</p>
+                <pre><code>&lt;input type="file" name="resume" accept=".pdf,.doc,.docx"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>value vs placeholder</h3>
+                <ul>
+                    <li><strong>value</strong> — the actual current value of the field. It is submitted with the form. Pre-fills the field with a real default.</li>
+                    <li><strong>placeholder</strong> — hint text shown when the field is empty. It is never submitted.</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 5 — LABELS
+        ============================================================ -->
+        <section id="labels">
+            <h2>5. Labels and Form Controls</h2>
+
+            <article>
+                <h3>Why Labels Are Important</h3>
+                <p>
+                    A label tells the user what to enter in a field. When properly associated, clicking or tapping the label text focuses the linked input —
+                    which enlarges the tap target on mobile. Labels also communicate field purpose clearly.
+                </p>
+            </article>
+
+            <article>
+                <h3>Explicit Association</h3>
+                <p>The <code>for</code> attribute on the <code>&lt;label&gt;</code> must match the <code>id</code> on the input.</p>
+                <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;</code></pre>
+                <p><strong>Best practice:</strong> Use explicit association. It is clearer in code and works with any layout.</p>
+            </article>
+
+            <article>
+                <h3>Implicit Association</h3>
+                <p>Wrapping the input inside the label creates an implicit association. No <code>for</code> or <code>id</code> is needed.</p>
+                <pre><code>&lt;label&gt;
+    Email Address
+    &lt;input type="email" name="email"&gt;
+&lt;/label&gt;</code></pre>
+                <p><strong>Note:</strong> Both methods are valid HTML5. Explicit association is generally preferred for readability and flexibility.</p>
+            </article>
+
+            <article>
+                <h3>Why Placeholder Should Not Replace a Label</h3>
+                <ul>
+                    <li>Placeholder text disappears when the user starts typing — they can no longer see what the field is for.</li>
+                    <li>Placeholder text has lower contrast than normal text, making it harder to read.</li>
+                    <li>Users may mistake placeholder text for a pre-filled value and skip the field.</li>
+                </ul>
+                <p><strong>Always use a visible <code>&lt;label&gt;</code>.</strong> Use <code>placeholder</code> only as supplementary hint text.</p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 6 — CHECKBOX AND RADIO
+        ============================================================ -->
+        <section id="checkbox-radio">
+            <h2>6. Checkbox and Radio Button Groups</h2>
+
+            <article>
+                <h3>Checkbox Behavior</h3>
+                <p>
+                    Each checkbox is independent. The user can select zero, one, or many.
+                    The <code>name</code> is used as the key and <code>value</code> as the submitted value when checked.
+                    Unchecked checkboxes are NOT submitted.
+                </p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Skills&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="java"&gt; Java&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="react" checked&gt; React&lt;/label&gt;
+    &lt;label&gt;&lt;input type="checkbox" name="skills" value="spring"&gt; Spring Boot&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+                <p>If the user selects Java and React, the submitted data is: <code>skills=java&amp;skills=react</code></p>
+            </article>
+
+            <article>
+                <h3>Radio Button Behavior</h3>
+                <p>
+                    Radio buttons with the same <code>name</code> form a group. Only one can be selected at a time.
+                    Selecting one deselects the others.
+                </p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="junior"&gt; Junior (0–2 years)&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="mid" checked&gt; Mid-level (3–5 years)&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp_level" value="senior"&gt; Senior (6+ years)&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+                <p>If "Senior" is selected, the submitted data is: <code>exp_level=senior</code></p>
+            </article>
+
+            <article>
+                <h3>Checkbox vs Radio</h3>
+                <ul>
+                    <li><strong>Checkbox</strong> — multiple selections allowed. Use for "select all that apply."</li>
+                    <li><strong>Radio</strong> — only one selection from the group. Use for "select exactly one."</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 7 — SELECT AND DATALIST
+        ============================================================ -->
+        <section id="select-datalist">
+            <h2>7. Select, Option, Optgroup and Datalist</h2>
+
+            <article>
+                <h3>&lt;select&gt; — Basic Dropdown</h3>
+                <p>Renders as a dropdown menu. The user must choose from the available options.</p>
+                <pre><code>&lt;label for="dept"&gt;Department&lt;/label&gt;
+&lt;select id="dept" name="department" required&gt;
+    &lt;option value=""&gt;Select a department&lt;/option&gt;
+    &lt;option value="engineering"&gt;Engineering&lt;/option&gt;
+    &lt;option value="design"&gt;Design&lt;/option&gt;
+    &lt;option value="product"&gt;Product&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                <p>The <code>value</code> is what gets submitted. The text between <code>&lt;option&gt;</code> tags is what the user sees.</p>
+            </article>
+
+            <article>
+                <h3>&lt;optgroup&gt; — Grouping Options</h3>
+                <p>Groups related options under a labelled category. The group label is not selectable.</p>
+                <pre><code>&lt;label for="job-category"&gt;Job Category&lt;/label&gt;
+&lt;select id="job-category" name="job_category"&gt;
+    &lt;optgroup label="Backend"&gt;
+        &lt;option value="java-dev"&gt;Java Developer&lt;/option&gt;
+        &lt;option value="spring-dev"&gt;Spring Boot Developer&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="Frontend"&gt;
+        &lt;option value="react-dev"&gt;React Developer&lt;/option&gt;
+        &lt;option value="vue-dev"&gt;Vue Developer&lt;/option&gt;
+    &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>&lt;select&gt; with selected and multiple</h3>
+                <pre><code>&lt;select name="tech_stack" multiple&gt;
+    &lt;option value="java" selected&gt;Java&lt;/option&gt;
+    &lt;option value="react"&gt;React&lt;/option&gt;
+    &lt;option value="spring" selected&gt;Spring Boot&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                <p>With <code>multiple</code>, the user can hold Ctrl/Cmd and click to select multiple options.</p>
+            </article>
+
+            <article>
+                <h3>&lt;datalist&gt; — Suggestions with Free Input</h3>
+                <p>
+                    A <code>&lt;datalist&gt;</code> provides autocomplete suggestions, but the user is not restricted to them —
+                    they can type any value. Connect it to an <code>&lt;input&gt;</code> via matching <code>list</code> and <code>id</code>.
+                </p>
+                <pre><code>&lt;label for="job-title"&gt;Desired Job Title&lt;/label&gt;
+&lt;input type="text" id="job-title" name="desired_title" list="titles"&gt;
+&lt;datalist id="titles"&gt;
+    &lt;option value="Java Developer"&gt;
+    &lt;option value="React Developer"&gt;
+    &lt;option value="Full Stack Developer"&gt;
+    &lt;option value="DevOps Engineer"&gt;
+&lt;/datalist&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>select vs datalist</h3>
+                <ul>
+                    <li><strong>select</strong> — forces the user to choose from a fixed list. The value must be one of the options. Use when only predefined values are valid.</li>
+                    <li><strong>datalist</strong> — offers suggestions but allows any free-text input. Use when you want to help the user but not restrict them.</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 8 — FILE INPUT
+        ============================================================ -->
+        <section id="file-input">
+            <h2>8. File Input</h2>
+
+            <article>
+                <h3>Basic File Input</h3>
+                <pre><code>&lt;label for="resume"&gt;Upload Resume&lt;/label&gt;
+&lt;input type="file" id="resume" name="resume"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>accept — File Type Hints</h3>
+                <p>
+                    <code>accept</code> filters the file picker dialog to show only matching file types.
+                    It accepts MIME types or file extensions.
+                </p>
+                <pre><code>&lt;input type="file" name="resume" accept=".pdf,.doc,.docx"&gt;
+&lt;input type="file" name="photo" accept="image/*"&gt;
+&lt;input type="file" name="video" accept="video/mp4,video/webm"&gt;</code></pre>
+                <aside>
+                    <p>
+                        <strong>Security warning:</strong> <code>accept</code> is only a hint to the file picker UI.
+                        A user can bypass it and upload any file.
+                        Server-side validation is always required to verify file type, size, and content.
+                    </p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>multiple — Selecting Multiple Files</h3>
+                <pre><code>&lt;label for="certs"&gt;Upload Certificates (select multiple)&lt;/label&gt;
+&lt;input type="file" id="certs" name="certificates" multiple&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Resume Upload — Real-World Example</h3>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Resume&lt;/legend&gt;
+    &lt;label for="resume-file"&gt;Upload your Resume (PDF, max 2MB)&lt;/label&gt;
+    &lt;input type="file" id="resume-file" name="resume" accept=".pdf" required&gt;
+&lt;/fieldset&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Why enctype Must Change for File Uploads</h3>
+                <p>
+                    By default, forms use <code>enctype="application/x-www-form-urlencoded"</code>, which encodes data as key=value pairs in text.
+                    File binary data cannot be represented this way.
+                    For file uploads, the form must use <code>enctype="multipart/form-data"</code>.
+                </p>
+                <pre><code>&lt;form action="/apply" method="post" enctype="multipart/form-data"&gt;
+    &lt;input type="file" name="resume"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 9 — HTML FORM VALIDATION
+        ============================================================ -->
+        <section id="validation">
+            <h2>9. HTML Form Validation</h2>
+
+            <article>
+                <h3>What Is Client-Side Validation?</h3>
+                <p>
+                    Client-side validation checks the form data in the browser before sending it to the server.
+                    HTML5 provides built-in browser validation through attributes — no JavaScript needed.
+                    This gives the user immediate feedback without a server round-trip.
+                </p>
+            </article>
+
+            <article>
+                <h3>required</h3>
+                <p>The browser prevents submission if the field is empty.</p>
+                <pre><code>&lt;input type="text" name="full_name" required&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>type validation</h3>
+                <p>
+                    The browser validates the value against the input type's format automatically.
+                    <code>type="email"</code> requires an <code>@</code> symbol. <code>type="url"</code> requires a valid URL format.
+                </p>
+                <pre><code>&lt;input type="email" name="email" required&gt;
+&lt;input type="url" name="portfolio"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>min and max</h3>
+                <p>Prevents submission if the numeric or date value is outside the specified range.</p>
+                <pre><code>&lt;input type="number" name="experience" min="0" max="50"&gt;
+&lt;input type="date" name="joining" min="2026-01-01"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>step</h3>
+                <p>Requires the value to be a multiple of <code>step</code> from the <code>min</code> (or 0). An invalid step triggers a validation error.</p>
+                <pre><code>&lt;input type="number" name="salary" min="0" max="100" step="5"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>minlength and maxlength</h3>
+                <pre><code>&lt;input type="password" name="password" minlength="8" maxlength="64" required&gt;
+&lt;textarea name="cover_letter" minlength="100" maxlength="2000"&gt;&lt;/textarea&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>pattern</h3>
+                <p>A regex that the entire value must match.</p>
+                <pre><code>&lt;input type="tel" name="phone" pattern="[0-9]{10}" title="Enter a 10-digit phone number"&gt;</code></pre>
+                <p>Use <code>title</code> alongside <code>pattern</code> to describe the expected format — the browser shows it in the error tooltip.</p>
+            </article>
+
+            <article>
+                <h3>Complete Validation Example</h3>
+                <pre><code>&lt;form action="/apply" method="post"&gt;
+    &lt;label for="name"&gt;Full Name&lt;/label&gt;
+    &lt;input type="text" id="name" name="full_name" required minlength="2" maxlength="100"&gt;
+
+    &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;input type="email" id="email" name="email" required&gt;
+
+    &lt;label for="phone"&gt;Phone&lt;/label&gt;
+    &lt;input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required&gt;
+
+    &lt;label for="exp"&gt;Years of Experience&lt;/label&gt;
+    &lt;input type="number" id="exp" name="experience" min="0" max="50" required&gt;
+
+    &lt;button type="submit"&gt;Submit Application&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Client-Side vs Server-Side Validation</h3>
+                <ul>
+                    <li>
+                        <strong>Client-side validation</strong> — runs in the browser before the request is sent.
+                        Provides a fast, convenient user experience. Can be bypassed by the user.
+                    </li>
+                    <li>
+                        <strong>Server-side validation</strong> — runs on the server after the data is received.
+                        Cannot be bypassed. Must always be implemented.
+                    </li>
+                </ul>
+                <aside>
+                    <p>
+                        <strong>Critical rule:</strong> Never trust client-side validation as a security boundary.
+                        A user can disable HTML validation by modifying the HTML or sending a raw HTTP request.
+                        Server-side validation is mandatory for all security-sensitive data.
+                    </p>
+                </aside>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 10 — ADVANCED VALIDATION CONCEPTS
+        ============================================================ -->
+        <section id="advanced-validation">
+            <h2>10. Advanced Form Validation Concepts</h2>
+
+            <article>
+                <h3>Constraint Validation</h3>
+                <p>
+                    Constraint validation is the HTML5 mechanism that checks whether a form control satisfies its constraints
+                    (<code>required</code>, <code>type</code>, <code>min</code>, <code>max</code>, <code>pattern</code>, etc.)
+                    before the form is submitted. The browser evaluates each control against its constraints and marks it as
+                    <strong>valid</strong> or <strong>invalid</strong>.
+                </p>
+            </article>
+
+            <article>
+                <h3>Valid vs Invalid Form Controls</h3>
+                <p>
+                    A control is <strong>valid</strong> when all its constraints are satisfied.
+                    A control is <strong>invalid</strong> when at least one constraint is not satisfied.
+                    The browser shows a native error message for invalid controls when the user tries to submit.
+                </p>
+            </article>
+
+            <article>
+                <h3>novalidate</h3>
+                <p>
+                    Adding <code>novalidate</code> to the <code>&lt;form&gt;</code> element disables all browser-native validation for that form.
+                    The form can be submitted even if fields are invalid.
+                </p>
+                <pre><code>&lt;form action="/apply" method="post" novalidate&gt;
+    &lt;input type="email" name="email" required&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <p>
+                    <strong>When is novalidate useful?</strong> When you want to implement custom validation UI
+                    (via JavaScript) instead of the browser's default error messages. You still need to validate — you are only
+                    replacing the built-in feedback mechanism.
+                </p>
+            </article>
+
+            <article>
+                <h3>formnovalidate</h3>
+                <p>
+                    <code>formnovalidate</code> is placed on a specific <code>&lt;button&gt;</code> or <code>&lt;input type="submit"&gt;</code>.
+                    When that button is used to submit, form validation is skipped — regardless of whether <code>novalidate</code> is on the form.
+                </p>
+                <pre><code>&lt;form action="/apply" method="post"&gt;
+    &lt;input type="email" name="email" required&gt;
+    &lt;input type="text" name="full_name" required&gt;
+
+    &lt;button type="submit"&gt;Submit Application&lt;/button&gt;
+    &lt;button type="submit" formnovalidate name="action" value="draft"&gt;Save Draft&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <p>
+                    <strong>"Submit Application"</strong> triggers full validation — required fields must be filled.
+                    <strong>"Save Draft"</strong> uses <code>formnovalidate</code>, so the user can save an incomplete form without validation errors.
+                    The server can check <code>action=draft</code> to decide how to process the request.
+                </p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 11 — ADVANCED FORM ATTRIBUTES
+        ============================================================ -->
+        <section id="advanced-attributes">
+            <h2>11. Advanced Form Attributes</h2>
+
+            <article>
+                <h3>action</h3>
+                <p>The URL that receives the form data. If empty, the current page URL is used.</p>
+                <pre><code>&lt;form action="/api/apply"&gt;...&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>method</h3>
+                <p><code>get</code> appends data to the URL. <code>post</code> sends data in the request body.</p>
+            </article>
+
+            <article>
+                <h3>autocomplete (on the form)</h3>
+                <p>
+                    Setting <code>autocomplete="off"</code> on the <code>&lt;form&gt;</code> asks the browser not to autofill any controls.
+                    Individual controls can override this.
+                </p>
+                <pre><code>&lt;form autocomplete="off"&gt;...&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>enctype</h3>
+                <p>
+                    Controls how form data is encoded before sending.
+                    Only relevant for <code>method="post"</code>.
+                    Three values:
+                </p>
+                <ul>
+                    <li>
+                        <strong>application/x-www-form-urlencoded</strong> (default) —
+                        Data is encoded as URL query string format: <code>name=value&amp;name2=value2</code>.
+                        Suitable for text-only forms.
+                    </li>
+                    <li>
+                        <strong>multipart/form-data</strong> —
+                        Each field is sent as a separate part with its own headers.
+                        <strong>Required when the form includes file uploads.</strong>
+                        Without this, the file data is not transmitted correctly.
+                    </li>
+                    <li>
+                        <strong>text/plain</strong> —
+                        Data is sent as plain text. Not reliable for machine processing. Avoid.
+                    </li>
+                </ul>
+                <pre><code>&lt;form action="/apply" method="post" enctype="multipart/form-data"&gt;
+    &lt;input type="text" name="full_name"&gt;
+    &lt;input type="file" name="resume"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <aside>
+                    <p>
+                        <strong>Rule:</strong> Always use <code>enctype="multipart/form-data"</code> when your form has a <code>type="file"</code> input.
+                        Without it, the server receives a filename string, not the file content.
+                    </p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>target</h3>
+                <p>Specifies where to display the response after submission. Common values:</p>
+                <ul>
+                    <li><strong>_self</strong> (default) — load in the same tab.</li>
+                    <li><strong>_blank</strong> — load in a new tab.</li>
+                </ul>
+                <pre><code>&lt;form action="/preview" target="_blank"&gt;...&lt;/form&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>novalidate (on the form)</h3>
+                <p>Disables all browser-native validation. See section 10 for full explanation.</p>
+            </article>
+
+            <article>
+                <h3>name (on the form)</h3>
+                <p>Gives the form a name so it can be referenced by legacy JavaScript or linked from a <code>button</code> via <code>form</code> attribute.</p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 12 — FORM SUBMISSION
+        ============================================================ -->
+        <section id="submission">
+            <h2>12. Form Submission</h2>
+
+            <article>
+                <h3>How Native Form Submission Works</h3>
+                <p>
+                    When a user submits a form, the browser gathers all <strong>successful controls</strong> and sends them as name/value pairs
+                    to the URL in <code>action</code> using the specified <code>method</code>.
+                </p>
+            </article>
+
+            <article>
+                <h3>Successful Controls</h3>
+                <p>A form control is <strong>successful</strong> (i.e., its data is submitted) when all of the following are true:</p>
+                <ul>
+                    <li>It has a <code>name</code> attribute.</li>
+                    <li>It is not <code>disabled</code>.</li>
+                    <li>For checkboxes and radio buttons — it is checked.</li>
+                    <li>For <code>&lt;select&gt;</code> — at least one option is selected.</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Why name Matters</h3>
+                <p>
+                    A control without a <code>name</code> attribute is never submitted, regardless of its value.
+                    The name is the key in the submitted data.
+                </p>
+                <pre><code>&lt;input type="text" value="Karthikeyan"&gt;
+</code></pre>
+                <p>The above input is <strong>never submitted</strong> — there is no <code>name</code>.</p>
+                <pre><code>&lt;input type="text" name="full_name" value="Karthikeyan"&gt;
+</code></pre>
+                <p>This submits: <code>full_name=Karthikeyan</code></p>
+            </article>
+
+            <article>
+                <h3>What Happens to Disabled Controls</h3>
+                <p>
+                    <code>disabled</code> controls are not submitted. Their values are completely excluded from the request,
+                    even if they have a <code>name</code> and a <code>value</code>.
+                </p>
+            </article>
+
+            <article>
+                <h3>What Happens to Unchecked Checkboxes</h3>
+                <p>
+                    Unchecked checkboxes are not submitted. If you need to detect "not checked" on the server,
+                    use a hidden field with the same name as a fallback.
+                </p>
+                <pre><code>&lt;input type="hidden" name="newsletter" value="no"&gt;
+&lt;label&gt;&lt;input type="checkbox" name="newsletter" value="yes"&gt; Subscribe to newsletter&lt;/label&gt;</code></pre>
+                <p>If the checkbox is unchecked, the hidden field's value (<code>newsletter=no</code>) is submitted. If checked, both are submitted — the server sees the last value.</p>
+            </article>
+
+            <article>
+                <h3>Radio Button Submission</h3>
+                <p>Only the selected radio button in a group is submitted. If no radio button in a group is selected, nothing is submitted for that group.</p>
+            </article>
+
+            <article>
+                <h3>GET Form Submission</h3>
+                <p>Data is appended to the URL as a query string.</p>
+                <pre><code>&lt;form action="/jobs" method="get"&gt;
+    &lt;input type="search" name="keyword" value="react"&gt;
+    &lt;input type="text" name="location" value="bangalore"&gt;
+    &lt;button type="submit"&gt;Search&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <p>On submission, the browser navigates to:</p>
+                <pre><code>/jobs?keyword=react&amp;location=bangalore</code></pre>
+            </article>
+
+            <article>
+                <h3>POST Form Submission</h3>
+                <p>Data is sent in the request body — not visible in the URL.</p>
+                <pre><code>&lt;form action="/apply" method="post"&gt;
+    &lt;input type="text" name="full_name" value="Karthikeyan"&gt;
+    &lt;input type="email" name="email" value="k@example.com"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                <p>The request body contains: <code>full_name=Karthikeyan&amp;email=k%40example.com</code></p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 13 — COMMON MISTAKES
+        ============================================================ -->
+        <section id="mistakes">
+            <h2>13. Common HTML Form Mistakes</h2>
+
+            <article>
+                <h3>1. Using placeholder Instead of label</h3>
+                <pre><code>&lt;input type="text" name="email" placeholder="Email Address"&gt;</code></pre>
+                <p>The label disappears once the user starts typing.</p>
+                <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input type="email" id="email" name="email" placeholder="you@example.com"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>2. Missing name Attribute</h3>
+                <pre><code>&lt;input type="text" id="fullname"&gt;</code></pre>
+                <p>Value is never submitted because there is no <code>name</code>.</p>
+                <pre><code>&lt;input type="text" id="fullname" name="full_name"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>3. Missing for/id Relationship</h3>
+                <pre><code>&lt;label&gt;Email&lt;/label&gt;
+&lt;input type="email" name="email"&gt;</code></pre>
+                <p>Clicking the label does not focus the input.</p>
+                <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email" id="email" name="email"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>4. Using the Wrong Input Type</h3>
+                <pre><code>&lt;input type="text" name="phone"&gt;</code></pre>
+                <p>Misses mobile keyboard optimisation and semantic meaning.</p>
+                <pre><code>&lt;input type="tel" name="phone" pattern="[0-9]{10}"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>5. Forgetting type on &lt;button&gt;</h3>
+                <pre><code>&lt;button&gt;Save Draft&lt;/button&gt;</code></pre>
+                <p>Defaults to <code>type="submit"</code> — submits the form unexpectedly.</p>
+                <pre><code>&lt;button type="button"&gt;Save Draft&lt;/button&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>6. Using disabled When readonly Is Required</h3>
+                <pre><code>&lt;input type="text" name="job_ref" value="JOB-001" disabled&gt;</code></pre>
+                <p><code>disabled</code> — value is NOT submitted. If you need the value sent to the server, this is wrong.</p>
+                <pre><code>&lt;input type="text" name="job_ref" value="JOB-001" readonly&gt;</code></pre>
+                <p><code>readonly</code> — value IS submitted. Use this when the user should see but not edit the value.</p>
+            </article>
+
+            <article>
+                <h3>7. Assuming hidden Fields Are Secure</h3>
+                <pre><code>&lt;input type="hidden" name="user_role" value="admin"&gt;</code></pre>
+                <p>Hidden fields are visible in the page source and can be modified by any user. Never use them for access control.</p>
+                <pre><code>&lt;input type="hidden" name="job_id" value="JOB-001"&gt;</code></pre>
+                <p>Use hidden fields only for non-sensitive context data. Verify all hidden field values server-side.</p>
+            </article>
+
+            <article>
+                <h3>8. Assuming Client-Side Validation Is Secure</h3>
+                <pre><code>&lt;input type="email" name="email" required&gt;</code></pre>
+                <p>A user can remove the <code>required</code> attribute using browser DevTools, or send a raw HTTP request, bypassing all HTML validation.</p>
+                <p>Always validate all inputs on the server. Client-side validation is a UX convenience, not a security control.</p>
+            </article>
+
+            <article>
+                <h3>9. Using type="number" for Non-Numeric Quantities</h3>
+                <pre><code>&lt;input type="number" name="phone"&gt;</code></pre>
+                <p>Phone numbers can start with 0 and should not be incremented like a number.</p>
+                <pre><code>&lt;input type="tel" name="phone" pattern="[0-9]{10}"&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>10. Overusing pattern</h3>
+                <pre><code>&lt;input type="email" name="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"&gt;</code></pre>
+                <p>Redundant — <code>type="email"</code> already handles email format validation.</p>
+                <pre><code>&lt;input type="email" name="email" required&gt;</code></pre>
+                <p>Use <code>pattern</code> only when the built-in type validation is insufficient for your specific requirements.</p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 14 — COMPLETE JOB APPLICATION FORM
+        ============================================================ -->
+        <section id="complete-form">
+            <h2>14. Complete Job Application Form</h2>
+            <p>This form applies all concepts from this page. Study the structure, attributes, and groupings.</p>
+
+            <form action="/apply" method="post" enctype="multipart/form-data">
+
+                <fieldset>
+                    <legend>Personal Information</legend>
+
+                    <label for="app-fullname">Full Name</label>
+                    <input type="text" id="app-fullname" name="full_name" required minlength="2" maxlength="100" autocomplete="name">
+
+                    <label for="app-email">Email Address</label>
+                    <input type="email" id="app-email" name="email" required autocomplete="email">
+
+                    <label for="app-phone">Phone Number</label>
+                    <input type="tel" id="app-phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit number" required autocomplete="tel">
+                </fieldset>
+
+                <fieldset>
+                    <legend>Professional Information</legend>
+
+                    <label for="app-jobtitle">Job Title Applying For</label>
+                    <input type="text" id="app-jobtitle" name="job_title" list="job-title-suggestions" required>
+                    <datalist id="job-title-suggestions">
+                        <option value="Java Developer">
+                        <option value="Spring Boot Developer">
+                        <option value="React Developer">
+                        <option value="Full Stack Developer">
+                        <option value="DevOps Engineer">
+                    </datalist>
+
+                    <label for="app-exp">Years of Experience</label>
+                    <input type="number" id="app-exp" name="experience_years" min="0" max="50" step="1" required>
+
+                    <fieldset>
+                        <legend>Skills</legend>
+                        <label><input type="checkbox" name="skills" value="java"> Java</label>
+                        <label><input type="checkbox" name="skills" value="spring"> Spring Boot</label>
+                        <label><input type="checkbox" name="skills" value="react"> React</label>
+                        <label><input type="checkbox" name="skills" value="nodejs"> Node.js</label>
+                        <label><input type="checkbox" name="skills" value="devops"> DevOps</label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Experience Level</legend>
+                        <label><input type="radio" name="exp_level" value="junior" required> Junior (0–2 years)</label>
+                        <label><input type="radio" name="exp_level" value="mid"> Mid-level (3–5 years)</label>
+                        <label><input type="radio" name="exp_level" value="senior"> Senior (6+ years)</label>
+                    </fieldset>
+
+                    <label for="app-emptype">Employment Type</label>
+                    <select id="app-emptype" name="employment_type" required>
+                        <option value="">Select employment type</option>
+                        <optgroup label="Full Time">
+                            <option value="ft-onsite">Full Time Onsite</option>
+                            <option value="ft-remote">Full Time Remote</option>
+                            <option value="ft-hybrid">Full Time Hybrid</option>
+                        </optgroup>
+                        <optgroup label="Part Time">
+                            <option value="contract">Contract</option>
+                            <option value="freelance">Freelance</option>
+                        </optgroup>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Additional Information</legend>
+
+                    <label for="app-portfolio">Portfolio URL</label>
+                    <input type="url" id="app-portfolio" name="portfolio_url" placeholder="https://yourportfolio.com">
+
+                    <label for="app-salary">Expected Salary (LPA)</label>
+                    <input type="number" id="app-salary" name="expected_salary_lpa" min="3" max="100" step="1" placeholder="e.g. 12">
+
+                    <label for="app-joining">Available From (Joining Date)</label>
+                    <input type="date" id="app-joining" name="joining_date" min="2026-01-01">
+
+                    <label for="app-cover">Cover Letter</label>
+                    <textarea id="app-cover" name="cover_letter" rows="8" minlength="100" maxlength="3000" placeholder="Briefly describe why you are a good fit for this role..."></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Resume</legend>
+                    <label for="app-resume">Upload Resume (PDF, max 2MB)</label>
+                    <input type="file" id="app-resume" name="resume" accept=".pdf" required>
+                </fieldset>
+
+                <input type="hidden" name="job_ref" value="JOB-2026-001">
+                <input type="hidden" name="source" value="learning-hub">
+
+                <button type="submit">Submit Application</button>
+                <button type="submit" formnovalidate name="form_action" value="draft">Save Draft</button>
+                <button type="reset">Clear Form</button>
+
+            </form>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 15 — FORM ACCESSIBILITY FUNDAMENTALS
+        ============================================================ -->
+        <section id="accessibility">
+            <h2>15. Form Accessibility Fundamentals</h2>
+            <p>This section covers form-specific HTML practices that make forms accessible to all users. ARIA is a separate topic.</p>
+
+            <article>
+                <h3>Proper Labels</h3>
+                <p>Every interactive form control must have a visible, correctly associated <code>&lt;label&gt;</code>.
+                   This allows keyboard navigation and screen readers to announce what each field is.</p>
+            </article>
+
+            <article>
+                <h3>Grouping with fieldset and legend</h3>
+                <p>
+                    Use <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> to group related controls.
+                    This is especially important for radio buttons and checkboxes — the <code>&lt;legend&gt;</code> acts as the label for the group.
+                </p>
+                <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="senior"&gt; Senior&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Correct Input Types</h3>
+                <p>Using the right <code>type</code> on mobile devices triggers the appropriate keyboard
+                   (email keyboard, numeric pad, phone pad). This reduces user errors and speeds up data entry.</p>
+            </article>
+
+            <article>
+                <h3>Clear Visible Labels</h3>
+                <p>Labels must be visible at all times — not hidden, not replaced by placeholder text.</p>
+            </article>
+
+            <article>
+                <h3>Required Fields</h3>
+                <p>
+                    Mark required fields clearly in the label text — for example, "Email Address (required)" — in addition to using the <code>required</code> attribute.
+                    Do not rely on color alone to indicate required status.
+                </p>
+                <pre><code>&lt;label for="email"&gt;Email Address (required)&lt;/label&gt;
+&lt;input type="email" id="email" name="email" required&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Meaningful Button Text</h3>
+                <p>
+                    Button text should describe the action clearly.
+                    "Submit Application" is better than "Submit."
+                    "Upload Resume" is better than "Upload."
+                </p>
+            </article>
+
+            <article>
+                <h3>Keyboard-Friendly Native Controls</h3>
+                <p>
+                    Native HTML form controls (<code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;button&gt;</code>)
+                    are keyboard-accessible by default. Users can navigate with Tab, select with Space/Enter, and operate dropdowns with arrow keys.
+                    Avoid replacing them with <code>&lt;div&gt;</code>-based custom controls.
+                </p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 16 — SENIOR-LEVEL CONCEPTS
+        ============================================================ -->
+        <section id="senior-concepts">
+            <h2>16. Senior Frontend Form Concepts</h2>
+
+            <article>
+                <h3>Why Native HTML Controls Should Be Preferred</h3>
+                <p>
+                    Native controls are keyboard accessible, mobile-friendly, and understood by browsers and assistive technologies
+                    without additional code. Custom controls built from <code>&lt;div&gt;</code> require significantly more effort
+                    to replicate the same behavior reliably.
+                </p>
+            </article>
+
+            <article>
+                <h3>Why Semantic Form Controls Matter</h3>
+                <p>
+                    <code>&lt;fieldset&gt;</code> communicates grouping. <code>&lt;legend&gt;</code> names the group.
+                    <code>&lt;label&gt;</code> communicates association. These relationships are conveyed through HTML structure,
+                    not through CSS classes or JavaScript. A browser, screen reader, or search engine can understand the form structure
+                    from the markup alone.
+                </p>
+            </article>
+
+            <article>
+                <h3>Browser-Native Validation vs Custom Validation</h3>
+                <p>
+                    Native HTML validation is fast, requires no JavaScript, and works without a framework.
+                    Custom validation gives more control over error messages and UI, but requires JavaScript and must be maintained.
+                    A senior engineer chooses the right level — native validation first, custom only when necessary.
+                </p>
+            </article>
+
+            <article>
+                <h3>Client-Side vs Server-Side Validation</h3>
+                <p>
+                    Client-side validation is a usability feature — it provides immediate feedback.
+                    Server-side validation is a security requirement — it cannot be bypassed.
+                    <strong>Both are always needed. They are not alternatives to each other.</strong>
+                </p>
+            </article>
+
+            <article>
+                <h3>Why Hidden Fields Cannot Be Trusted</h3>
+                <p>
+                    A hidden field is visible in the HTML source. Any user can open DevTools, change the value, and submit the form.
+                    Never use hidden fields to carry privilege levels, user roles, or prices.
+                    Always validate and authorise on the server.
+                </p>
+            </article>
+
+            <article>
+                <h3>Why accept Is Not Security Validation</h3>
+                <p>
+                    <code>accept</code> on a file input only filters the browser's file picker UI.
+                    A user can bypass it trivially. The server must always validate file type, size, and content independently.
+                </p>
+            </article>
+
+            <article>
+                <h3>Why disabled and readonly Behave Differently During Submission</h3>
+                <p>
+                    <code>disabled</code> removes the control from form submission entirely.
+                    <code>readonly</code> includes the value in the submission.
+                    Choosing the wrong one silently drops data or exposes data to modification.
+                </p>
+            </article>
+
+            <article>
+                <h3>Why name Is Critical for Native Submission</h3>
+                <p>
+                    The <code>name</code> attribute is the only mechanism that identifies a value in a form submission.
+                    A field without <code>name</code> never appears in the submitted data — it is silently ignored.
+                    This is a common source of bugs in form handling.
+                </p>
+            </article>
+
+            <article>
+                <h3>How Form Design Affects Accessibility and UX</h3>
+                <p>
+                    Long, ungrouped forms are harder to navigate. <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>
+                    create logical groups that benefit all users. Clear label text, appropriate input types, and meaningful error messages
+                    reduce cognitive load and form abandonment.
+                </p>
+            </article>
+
+            <article>
+                <h3>Choosing the Correct Input Type Based on the Data</h3>
+                <ul>
+                    <li>Phone numbers → <code>tel</code>, not <code>number</code></li>
+                    <li>Postal/ZIP codes → <code>text</code> with <code>pattern</code>, not <code>number</code></li>
+                    <li>Dates → <code>date</code>, not <code>text</code></li>
+                    <li>URLs → <code>url</code>, not <code>text</code></li>
+                    <li>Passwords → <code>password</code>, not <code>text</code></li>
+                    <li>Search → <code>search</code>, not <code>text</code></li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Progressive Enhancement with Native HTML Forms</h3>
+                <p>
+                    A well-built HTML form works without JavaScript. Native validation, submission, and controls function in the browser
+                    without any script. JavaScript can then enhance the experience — adding custom error messages, dynamic fields, or
+                    AJAX submission — but the core form remains functional even if JavaScript fails to load.
+                </p>
+            </article>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 17 — INTERVIEW QUESTIONS
+        ============================================================ -->
+        <section id="interview">
+            <h2>17. Interview Questions</h2>
+
+            <section>
+                <h3>Beginner</h3>
+
+                <details>
+                    <summary>What is an HTML form?</summary>
+                    <p>An HTML form is a section of a webpage that collects user input and submits it to a server or processes it on the client. It is defined by the <code>&lt;form&gt;</code> element and contains form controls such as inputs, selects, and buttons.</p>
+                </details>
+
+                <details>
+                    <summary>What is the purpose of the &lt;form&gt; element?</summary>
+                    <p>The <code>&lt;form&gt;</code> element groups form controls together, defines where data is sent (<code>action</code>), how it is sent (<code>method</code>), and how it is encoded (<code>enctype</code>). It establishes the context for form submission.</p>
+                </details>
+
+                <details>
+                    <summary>What is an input type?</summary>
+                    <p>The <code>type</code> attribute on an <code>&lt;input&gt;</code> element controls the kind of control rendered and its behavior — for example, <code>type="email"</code> validates email format, <code>type="date"</code> shows a date picker, and <code>type="checkbox"</code> creates a toggle control.</p>
+                </details>
+
+                <details>
+                    <summary>Why is &lt;label&gt; important?</summary>
+                    <p>A <code>&lt;label&gt;</code> provides a visible, permanent text description for a form control. It improves usability by making the field purpose clear, enlarges the click/tap target, and is essential for keyboard and screen reader users. Every input must have an associated label.</p>
+                </details>
+
+            </section>
+
+            <section>
+                <h3>Intermediate</h3>
+
+                <details>
+                    <summary>What is the difference between id and name?</summary>
+                    <p><code>id</code> uniquely identifies an element within the page — used for label association, anchors, and DOM access. <code>name</code> is the key used in form submission — it identifies the control's data in the submitted payload. They can be the same string but serve completely different purposes.</p>
+                </details>
+
+                <details>
+                    <summary>What is the difference between GET and POST?</summary>
+                    <p><code>GET</code> appends form data to the URL as a query string. The data is visible in the browser address bar and can be bookmarked. Use for searches and filters. <code>POST</code> sends data in the request body, not visible in the URL. Use for login, registration, and file uploads.</p>
+                </details>
+
+                <details>
+                    <summary>What is the difference between checkbox and radio?</summary>
+                    <p>A checkbox allows multiple independent selections — zero or more can be checked at once. Radio buttons with the same <code>name</code> form a group where only one can be selected at a time. Use checkbox for "select all that apply," use radio for "select exactly one."</p>
+                </details>
+
+                <details>
+                    <summary>What is the difference between disabled and readonly?</summary>
+                    <p><code>disabled</code> makes the control inactive, non-focusable, and its value is NOT submitted. <code>readonly</code> prevents editing but keeps the control focusable and its value IS submitted. Use <code>readonly</code> when you need the server to receive the value.</p>
+                </details>
+
+                <details>
+                    <summary>Why should placeholder not replace a label?</summary>
+                    <p>Placeholder text disappears when the user starts typing, leaving them without a description of the field. Labels remain visible at all times. Relying on placeholder as a label causes confusion, reduces form accessibility, and fails users on smaller screens.</p>
+                </details>
+
+                <details>
+                    <summary>What is the difference between select and datalist?</summary>
+                    <p><code>&lt;select&gt;</code> forces the user to choose from a predefined fixed list — free text is not allowed. <code>&lt;datalist&gt;</code> offers suggestions for an <code>&lt;input&gt;</code> but allows the user to type any value. Use <code>select</code> when only specific values are valid; use <code>datalist</code> for autocomplete suggestions with open input.</p>
+                </details>
+
+            </section>
+
+            <section>
+                <h3>Advanced</h3>
+
+                <details>
+                    <summary>What are successful form controls?</summary>
+                    <p>A successful control is one whose value is included in the form submission. A control is successful when it has a <code>name</code> attribute, is not <code>disabled</code>, and — for checkboxes and radio buttons — is checked. Controls without <code>name</code> are never successful.</p>
+                </details>
+
+                <details>
+                    <summary>Why does name matter during form submission?</summary>
+                    <p>The <code>name</code> attribute is the key in the name/value pair that the browser sends to the server. Without a <code>name</code>, the control's value is completely excluded from the submitted data, regardless of whether it has a value. This is a silent failure — no error is shown.</p>
+                </details>
+
+                <details>
+                    <summary>What happens to disabled controls during submission?</summary>
+                    <p>Disabled controls are excluded from the form submission entirely. Their values are not sent to the server, even if they have a <code>name</code> and a <code>value</code>. If you need the value submitted, use <code>readonly</code> instead.</p>
+                </details>
+
+                <details>
+                    <summary>What is constraint validation?</summary>
+                    <p>Constraint validation is the HTML5 mechanism that checks form controls against their declared constraints (<code>required</code>, <code>type</code>, <code>min</code>, <code>max</code>, <code>pattern</code>, <code>minlength</code>, <code>maxlength</code>) before submission. The browser marks controls as valid or invalid and blocks submission if any required control is invalid.</p>
+                </details>
+
+                <details>
+                    <summary>What is novalidate?</summary>
+                    <p><code>novalidate</code> is a boolean attribute on <code>&lt;form&gt;</code> that disables all browser-native validation. The form can be submitted even if controls are invalid. It is used when implementing custom JavaScript-based validation, replacing the native error UI.</p>
+                </details>
+
+                <details>
+                    <summary>What is formnovalidate?</summary>
+                    <p><code>formnovalidate</code> is placed on a specific submit button. When that button is clicked to submit the form, browser validation is skipped for that submission only. The classic use case is a "Save Draft" button that should allow incomplete forms to be saved without triggering validation errors.</p>
+                </details>
+
+                <details>
+                    <summary>Why is client-side validation insufficient?</summary>
+                    <p>Client-side validation can be bypassed by disabling JavaScript, editing the HTML attributes in DevTools, or sending a raw HTTP request to the server endpoint. It provides a user experience benefit but is not a security control. Server-side validation is always mandatory.</p>
+                </details>
+
+                <details>
+                    <summary>Why is accept not a security feature for file uploads?</summary>
+                    <p>The <code>accept</code> attribute only instructs the browser's file picker to filter file types in the UI. A user can easily bypass it by typing a file path directly or by modifying the HTML. The server must independently validate file type, size, and content for all uploaded files.</p>
+                </details>
+
+                <details>
+                    <summary>When should enctype="multipart/form-data" be used?</summary>
+                    <p>It must be used whenever the form includes a <code>&lt;input type="file"&gt;</code> element. The default <code>application/x-www-form-urlencoded</code> encoding cannot represent binary file data correctly. Without <code>multipart/form-data</code>, the server receives only the filename string, not the file content.</p>
+                </details>
+
+                <details>
+                    <summary>What is the difference between min/max and minlength/maxlength?</summary>
+                    <p><code>min</code> and <code>max</code> constrain numeric or date values — for example, experience between 0 and 50 years. <code>minlength</code> and <code>maxlength</code> constrain the character count of text input — for example, a password must be at least 8 characters. They operate on different data types and are not interchangeable.</p>
+                </details>
+
+                <details>
+                    <summary>What happens to unchecked checkboxes during form submission?</summary>
+                    <p>Unchecked checkboxes are not submitted — they produce no name/value pair in the request. Only checked checkboxes submit their <code>name=value</code>. If the server needs to distinguish between "not checked" and "not present," use a hidden input with the same name as a fallback default value.</p>
+                </details>
+
+                <details>
+                    <summary>Why should type="number" not be used for phone numbers?</summary>
+                    <p>Phone numbers are not numeric quantities. They can start with 0 (which <code>type="number"</code> may strip), should not be incremented with a spinner, and may include country codes or extensions. Use <code>type="tel"</code> with a <code>pattern</code> attribute instead.</p>
+                </details>
+
+            </section>
+
+        </section>
+
+        <!-- ============================================================
+             SECTION 18 — FINAL CHECKLIST
+        ============================================================ -->
+        <section id="checklist">
+            <h2>18. Final Learning Checklist</h2>
+            <p>Check each item when you are confident you understand it:</p>
+
+            <ul>
+                <li>Understand <code>&lt;form&gt;</code> — its purpose and structure</li>
+                <li>Understand <code>action</code> and <code>method</code> attributes</li>
+                <li>Understand GET vs POST — when to use each</li>
+                <li>Know all important input types and when to use them</li>
+                <li>Understand <code>&lt;label&gt;</code> and the <code>id</code>/<code>for</code> relationship</li>
+                <li>Understand <code>name</code> and <code>value</code> — why both matter</li>
+                <li>Understand checkbox vs radio — behavior and submission differences</li>
+                <li>Understand <code>&lt;select&gt;</code> vs <code>&lt;datalist&gt;</code></li>
+                <li>Understand file uploads — <code>accept</code>, <code>multiple</code>, security limits</li>
+                <li>Understand native HTML validation — what it does and how it works</li>
+                <li>Understand all validation attributes — <code>required</code>, <code>min</code>, <code>max</code>, <code>pattern</code>, <code>minlength</code>, <code>maxlength</code></li>
+                <li>Understand <code>disabled</code> vs <code>readonly</code> — submission behavior</li>
+                <li>Understand how form submission works — name/value pairs, successful controls</li>
+                <li>Understand successful controls — what gets submitted and what does not</li>
+                <li>Understand <code>enctype</code> — especially <code>multipart/form-data</code> for file uploads</li>
+                <li>Understand client-side vs server-side validation — why both are needed</li>
+                <li>Understand <code>novalidate</code> and <code>formnovalidate</code></li>
+                <li>Understand <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code> — grouping and accessibility</li>
+                <li>Understand why hidden fields are not secure</li>
+                <li>Build a complete, accessible, validated HTML form without JavaScript</li>
+            </ul>
+
+            <aside>
+                <p>
+                    <strong>You are ready for the next topic when</strong> you can build the Job Application Form in section 14
+                    from memory, understand every attribute used, and explain what happens during submission — without referring to notes.
+                </p>
+            </aside>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>HTML Forms and Input Types &mdash; Frontend Learning Hub</p>
+        <address>Part of the Frontend Learning Hub series.</address>
+        <p><a href="#intro">Back to top</a></p>
+    </footer>
+
+</body>
+</html>

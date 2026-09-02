@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic HTML Learning Hub</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Semantic HTML Learning Hub</h1>
+        <p>
+            This page teaches you <strong>Semantic HTML and HTML5 Elements</strong> using only HTML.
+            Study the source code of this page — the structure itself is the lesson.
+        </p>
+    </header>
+
+    <nav>
+        <h2>Contents</h2>
+        <ul>
+            <li><a href="#what-is-semantic">What Is Semantic HTML?</a></li>
+            <li><a href="#semantic-vs-nonsemantic">Semantic vs Non-Semantic Elements</a></li>
+            <li><a href="#page-structure-elements">Page Structure Elements</a></li>
+            <li><a href="#text-content-elements">Text Content Elements</a></li>
+            <li><a href="#inline-text-elements">Inline Text Elements</a></li>
+            <li><a href="#figure-time-mark-address">figure, time, mark, address</a></li>
+            <li><a href="#details-summary">details and summary</a></li>
+            <li><a href="#generic-containers">Generic Containers: div and span</a></li>
+            <li><a href="#semantic-vs-div">Semantic HTML vs div</a></li>
+            <li><a href="#section-vs-article">Section vs Article</a></li>
+            <li><a href="#heading-hierarchy">Heading Hierarchy</a></li>
+            <li><a href="#checklist">Semantic HTML Checklist</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section id="what-is-semantic">
+            <h2>What Is Semantic HTML?</h2>
+            <p>
+                <strong>Semantic HTML</strong> means using HTML elements that carry meaning about the content they contain.
+                The element name itself communicates the <em>purpose</em> and <em>role</em> of the content to both the
+                browser and the developer reading the code.
+            </p>
+            <aside>
+                <p><strong>Key Idea:</strong> Prefer semantic HTML when an appropriate element exists. Choose HTML based on meaning, not appearance.</p>
+            </aside>
+        </section>
+
+        <section id="semantic-vs-nonsemantic">
+            <h2>Semantic vs Non-Semantic Elements</h2>
+
+            <article>
+                <h3>Non-Semantic Elements</h3>
+                <p>
+                    These elements say nothing about their content. They are generic containers.
+                </p>
+                <ul>
+                    <li><code>&lt;div&gt;</code> — a block-level generic container</li>
+                    <li><code>&lt;span&gt;</code> — an inline generic container</li>
+                </ul>
+                <p>Example of non-semantic markup:</p>
+                <pre><code>&lt;div class="header"&gt;
+    &lt;div class="nav"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+    &lt;div class="article"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;...&lt;/div&gt;</code></pre>
+            </article>
+
+            <article>
+                <h3>Semantic Elements</h3>
+                <p>
+                    These elements describe their purpose. A developer (or browser) reading
+                    <code>&lt;header&gt;</code> immediately understands it is the page header.
+                </p>
+                <ul>
+                    <li><code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code></li>
+                    <li><code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code></li>
+                    <li><code>&lt;footer&gt;</code>, <code>&lt;figure&gt;</code>, <code>&lt;time&gt;</code></li>
+                    <li><code>&lt;mark&gt;</code>, <code>&lt;address&gt;</code>, <code>&lt;details&gt;</code></li>
+                    <li><code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code></li>
+                </ul>
+                <p>Same page structure written semantically:</p>
+                <pre><code>&lt;header&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+    &lt;article&gt;...&lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+            </article>
+
+        </section>
+
+        <section id="page-structure-elements">
+            <h2>Page Structure Elements</h2>
+
+            <article>
+                <h3>&lt;header&gt;</h3>
+                <p><strong>Purpose:</strong> Represents introductory content for the page or a section. Usually contains the site title, logo text, or introductory description.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;header&gt;
+    &lt;h1&gt;My Website&lt;/h1&gt;
+    &lt;p&gt;Welcome to my site.&lt;/p&gt;
+&lt;/header&gt;</code></pre>
+                <p><strong>When to use:</strong> At the top of the page, or at the top of an <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code> when it has its own heading and intro.</p>
+            </article>
+
+            <article>
+                <h3>&lt;nav&gt;</h3>
+                <p><strong>Purpose:</strong> Represents a block of navigation links — links that help the user move around the site or page.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+                <p><strong>When to use:</strong> For primary or secondary navigation menus. Not every group of links needs to be a <code>&lt;nav&gt;</code>.</p>
+            </article>
+
+            <article>
+                <h3>&lt;main&gt;</h3>
+                <p><strong>Purpose:</strong> Represents the dominant content of the page. There should be only one <code>&lt;main&gt;</code> per page.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;main&gt;
+    &lt;h2&gt;Today's Article&lt;/h2&gt;
+    &lt;p&gt;This is the main content.&lt;/p&gt;
+&lt;/main&gt;</code></pre>
+                <p><strong>When to use:</strong> Wrap the central content of the page — everything that is not a header, footer, or sidebar.</p>
+            </article>
+
+            <article>
+                <h3>&lt;section&gt;</h3>
+                <p><strong>Purpose:</strong> Represents a thematic grouping of content, typically with its own heading. Sections are parts of a larger whole.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;section&gt;
+    &lt;h2&gt;Our Services&lt;/h2&gt;
+    &lt;p&gt;We offer design and development.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+                <p><strong>When to use:</strong> When content forms a distinct chapter or topic within a page. If you can give it a heading, it is likely a <code>&lt;section&gt;</code>.</p>
+            </article>
+
+            <article>
+                <h3>&lt;article&gt;</h3>
+                <p><strong>Purpose:</strong> Represents a self-contained piece of content that could stand alone — like a blog post, news item, or product card.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;article&gt;
+    &lt;h2&gt;How to Learn HTML&lt;/h2&gt;
+    &lt;p&gt;Start with the basics...&lt;/p&gt;
+&lt;/article&gt;</code></pre>
+                <p><strong>When to use:</strong> When the content makes sense on its own, independent of the rest of the page.</p>
+            </article>
+
+            <article>
+                <h3>&lt;aside&gt;</h3>
+                <p><strong>Purpose:</strong> Represents content that is tangentially related to the main content — like a tip, a sidebar note, or a callout box.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;aside&gt;
+    &lt;p&gt;Tip: Always validate your HTML.&lt;/p&gt;
+&lt;/aside&gt;</code></pre>
+                <p><strong>When to use:</strong> For supplementary content that adds context but is not part of the main narrative.</p>
+                <aside>
+                    <p><strong>Reminder:</strong> Use <code>&lt;div&gt;</code> when no suitable semantic element exists. Do not force a semantic element where it does not fit.</p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>&lt;footer&gt;</h3>
+                <p><strong>Purpose:</strong> Represents the footer of the page or a section. Typically contains copyright, contact links, or site metadata.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 My Website&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+                <p><strong>When to use:</strong> At the bottom of the page, or at the bottom of an <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code>.</p>
+            </article>
+
+        </section>
+
+        <section id="text-content-elements">
+            <h2>Text Content Elements</h2>
+
+            <article>
+                <h3>&lt;p&gt;</h3>
+                <p><strong>Purpose:</strong> Represents a paragraph of text.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;This is a paragraph of text.&lt;/p&gt;</code></pre>
+                <p><strong>When to use:</strong> For any block of prose or descriptive text. The browser adds spacing above and below automatically.</p>
+            </article>
+
+        </section>
+
+        <section id="inline-text-elements">
+            <h2>Inline Text Elements: strong, b, em, i</h2>
+
+            <article>
+                <h3>&lt;strong&gt; vs &lt;b&gt;</h3>
+                <p>
+                    <strong>&lt;strong&gt;</strong> means the content has <strong>strong importance</strong> — it is semantically significant.
+                    Use it when the text is critical or a warning.
+                </p>
+                <p>
+                    <b>&lt;b&gt;</b> draws attention to text for stylistic reasons <b>without implying importance</b>.
+                    It is a typographic convention with no semantic weight.
+                </p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Do not delete this file.&lt;/p&gt;
+&lt;p&gt;The product name is &lt;b&gt;HyperWidget Pro&lt;/b&gt;.&lt;/p&gt;</code></pre>
+                <p><strong>Rule:</strong> Prefer <code>&lt;strong&gt;</code> for meaningful emphasis. Use <code>&lt;b&gt;</code> only for stylistic bold text with no semantic significance.</p>
+            </article>
+
+            <article>
+                <h3>&lt;em&gt; vs &lt;i&gt;</h3>
+                <p>
+                    <em>&lt;em&gt;</em> means <em>stressed emphasis</em> — the meaning of the sentence changes based on the emphasis.
+                </p>
+                <p>
+                    <i>&lt;i&gt;</i> represents text in an <i>alternate voice or mood</i>, such as a technical term, foreign phrase, or title.
+                    It does not imply importance.
+                </p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;You &lt;em&gt;must&lt;/em&gt; save before closing.&lt;/p&gt;
+&lt;p&gt;The term &lt;i&gt;semantic&lt;/i&gt; comes from Greek.&lt;/p&gt;</code></pre>
+                <p><strong>Rule:</strong> Prefer <code>&lt;em&gt;</code> for meaningful stress. Use <code>&lt;i&gt;</code> for terms, titles, or alternate-voice text.</p>
+            </article>
+
+        </section>
+
+        <section id="figure-time-mark-address">
+            <h2>figure, time, mark, address</h2>
+
+            <article>
+                <h3>&lt;figure&gt; and &lt;figcaption&gt;</h3>
+                <p><strong>Purpose:</strong> <code>&lt;figure&gt;</code> wraps self-contained content like a diagram, code block, or illustration. <code>&lt;figcaption&gt;</code> provides a caption for it.</p>
+                <p><strong>Example — A Basic HTML Page Structure Diagram:</strong></p>
+                <figure>
+                    <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;...&lt;/header&gt;
+    &lt;nav&gt;...&lt;/nav&gt;
+    &lt;main&gt;
+      &lt;section&gt;...&lt;/section&gt;
+      &lt;article&gt;...&lt;/article&gt;
+    &lt;/main&gt;
+    &lt;aside&gt;...&lt;/aside&gt;
+    &lt;footer&gt;...&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    <figcaption>Figure 1: The semantic structure of a typical HTML5 page.</figcaption>
+                </figure>
+                <p><strong>When to use:</strong> When content (code, a diagram, a quote) is referenced from the main text but could be moved without breaking the flow.</p>
+            </article>
+
+            <article>
+                <h3>&lt;time&gt; and datetime</h3>
+                <p><strong>Purpose:</strong> Represents a specific date or time. The <code>datetime</code> attribute provides a machine-readable format while the element content shows a human-readable form.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;Published on &lt;time datetime="2026-09-02"&gt;September 2, 2026&lt;/time&gt;.&lt;/p&gt;
+&lt;p&gt;Meeting at &lt;time datetime="14:30"&gt;2:30 PM&lt;/time&gt;.&lt;/p&gt;</code></pre>
+                <p><strong>Live example:</strong> This page was created on <time datetime="2026-09-02">September 2, 2026</time>.</p>
+                <p><strong>When to use:</strong> Any time you display a date, time, or duration in text.</p>
+            </article>
+
+            <article>
+                <h3>&lt;mark&gt;</h3>
+                <p><strong>Purpose:</strong> Highlights text that is relevant in a specific context — like search results or a key term being defined.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;Search results for: &lt;mark&gt;semantic HTML&lt;/mark&gt;&lt;/p&gt;</code></pre>
+                <p><strong>Live example:</strong> The most important concept in this page is <mark>semantic HTML</mark>.</p>
+                <p><strong>When to use:</strong> To highlight text for reference purposes, not purely for decoration.</p>
+            </article>
+
+            <article>
+                <h3>&lt;address&gt;</h3>
+                <p><strong>Purpose:</strong> Represents contact information for the nearest <code>&lt;article&gt;</code> or the whole page.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;address&gt;
+    Written by &lt;a href="mailto:author@example.com"&gt;Jane Doe&lt;/a&gt;.
+    123 Learning Street, Web City.
+&lt;/address&gt;</code></pre>
+                <p><strong>When to use:</strong> For contact details of the author or organisation — not for postal addresses unrelated to the document.</p>
+            </article>
+
+        </section>
+
+        <section id="details-summary">
+            <h2>&lt;details&gt; and &lt;summary&gt;</h2>
+
+            <article>
+                <h3>Purpose</h3>
+                <p>
+                    <code>&lt;details&gt;</code> creates a disclosure widget — content that is hidden by default and can be shown by the user.
+                    <code>&lt;summary&gt;</code> provides the visible label for the widget.
+                    No JavaScript is needed; this is built into HTML5.
+                </p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;details&gt;
+    &lt;summary&gt;What is semantic HTML?&lt;/summary&gt;
+    &lt;p&gt;It is HTML that uses elements based on their meaning.&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+                <p><strong>Live example — click to expand:</strong></p>
+                <details>
+                    <summary>Why does semantic HTML matter?</summary>
+                    <p>
+                        Semantic HTML makes your code easier to read and maintain.
+                        It also helps search engines and assistive technologies understand your content structure
+                        without relying on class names or visual appearance.
+                    </p>
+                </details>
+                <details>
+                    <summary>Can I use div for everything?</summary>
+                    <p>
+                        Technically yes, but you should not. When you use only <code>&lt;div&gt;</code> elements,
+                        the code becomes harder to read and the structure carries no meaning.
+                        Always prefer a semantic element when one exists.
+                    </p>
+                </details>
+                <p><strong>When to use:</strong> For FAQ entries, expandable explanations, or any content the user may not need to see immediately.</p>
+            </article>
+
+        </section>
+
+        <section id="generic-containers">
+            <h2>Generic Containers: &lt;div&gt; and &lt;span&gt;</h2>
+
+            <article>
+                <h3>&lt;div&gt;</h3>
+                <p><strong>Purpose:</strong> A block-level container with no inherent meaning. Use it only when no semantic element is appropriate.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;div&gt;
+    &lt;p&gt;A group of items that needs to be wrapped together.&lt;/p&gt;
+    &lt;p&gt;But no semantic element fits this grouping.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                <aside>
+                    <p><strong>Guideline:</strong> Use <code>&lt;div&gt;</code> when no suitable semantic element exists.</p>
+                </aside>
+            </article>
+
+            <article>
+                <h3>&lt;span&gt;</h3>
+                <p><strong>Purpose:</strong> An inline container with no inherent meaning. Use it to group inline content when no semantic inline element is appropriate.</p>
+                <p><strong>Example:</strong></p>
+                <pre><code>&lt;p&gt;The error code is &lt;span&gt;404&lt;/span&gt;.&lt;/p&gt;</code></pre>
+                <p><strong>When to use:</strong> When you need to group inline text but <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;mark&gt;</code>, or other inline elements do not fit the meaning.</p>
+            </article>
+
+        </section>
+
+        <section id="semantic-vs-div">
+            <h2>Semantic HTML vs &lt;div&gt;</h2>
+
+            <article>
+                <h3>Non-Semantic Version</h3>
+                <pre><code>&lt;div class="header"&gt;
+    &lt;div class="site-title"&gt;My Blog&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="nav"&gt;
+    &lt;div class="nav-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="main"&gt;
+    &lt;div class="article"&gt;
+        &lt;div class="article-title"&gt;My First Post&lt;/div&gt;
+        &lt;div class="article-body"&gt;Content here...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="footer"&gt;Copyright 2026&lt;/div&gt;</code></pre>
+                <p>
+                    Every element here is a <code>&lt;div&gt;</code>. The meaning lives only in class names,
+                    which are a CSS convention — not part of HTML's meaning system.
+                    A developer (or browser) reading this HTML cannot tell what each block represents
+                    without reading the class names.
+                </p>
+            </article>
+
+            <article>
+                <h3>Semantic Version</h3>
+                <pre><code>&lt;header&gt;
+    &lt;h1&gt;My Blog&lt;/h1&gt;
+&lt;/header&gt;
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;My First Post&lt;/h2&gt;
+        &lt;p&gt;Content here...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/main&gt;
+&lt;footer&gt;Copyright 2026&lt;/footer&gt;</code></pre>
+                <p>
+                    The meaning is now in the elements themselves.
+                    <code>&lt;header&gt;</code> communicates "this is the page header."
+                    <code>&lt;nav&gt;</code> communicates "these are navigation links."
+                    <code>&lt;article&gt;</code> communicates "this is a self-contained piece of content."
+                    No class names are needed to understand the structure.
+                </p>
+                <aside>
+                    <p>
+                        <strong>Key takeaway:</strong> In the semantic version, the HTML element name itself carries the meaning.
+                        You do not need to rely on <code>class="header"</code> to explain what a block is.
+                    </p>
+                </aside>
+            </article>
+
+        </section>
+
+        <section id="section-vs-article">
+            <h2>Section vs Article</h2>
+
+            <article>
+                <h3>The Core Difference</h3>
+                <p>
+                    <code>&lt;section&gt;</code> — a <strong>thematic grouping</strong> of related content that is part of a larger whole.
+                    It does not stand alone.
+                </p>
+                <p>
+                    <code>&lt;article&gt;</code> — a <strong>self-contained unit</strong> of content that could be distributed or read independently.
+                </p>
+            </article>
+
+            <article>
+                <h3>Job Portal Example</h3>
+                <p>Consider this job listing structure:</p>
+                <pre><code>Jobs
+├── Java Jobs
+│   ├── Java Developer
+│   └── Spring Boot Developer
+└── React Jobs
+    └── React Developer</code></pre>
+
+                <p>Here is how you would map this to semantic elements:</p>
+                <pre><code>&lt;main&gt;
+    &lt;h1&gt;Jobs&lt;/h1&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;Java Jobs&lt;/h2&gt;
+
+        &lt;article&gt;
+            &lt;h3&gt;Java Developer&lt;/h3&gt;
+            &lt;p&gt;We are looking for an experienced Java Developer...&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;article&gt;
+            &lt;h3&gt;Spring Boot Developer&lt;/h3&gt;
+            &lt;p&gt;Join our team as a Spring Boot specialist...&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;React Jobs&lt;/h2&gt;
+
+        &lt;article&gt;
+            &lt;h3&gt;React Developer&lt;/h3&gt;
+            &lt;p&gt;We need a React Developer with 2+ years of experience...&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/section&gt;
+
+&lt;/main&gt;</code></pre>
+
+                <p><strong>Why this mapping?</strong></p>
+                <ul>
+                    <li><strong>Java Jobs</strong> and <strong>React Jobs</strong> are <code>&lt;section&gt;</code> elements — they are thematic groupings within the Jobs page. They belong to the page and do not stand alone.</li>
+                    <li><strong>Java Developer</strong>, <strong>Spring Boot Developer</strong>, and <strong>React Developer</strong> are <code>&lt;article&gt;</code> elements — each job listing is a self-contained unit. It could be taken out and read independently.</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <section id="heading-hierarchy">
+            <h2>Heading Hierarchy: &lt;h1&gt; to &lt;h6&gt;</h2>
+
+            <article>
+                <h3>Purpose</h3>
+                <p>
+                    Headings communicate the <strong>outline</strong> of your page.
+                    <code>&lt;h1&gt;</code> is the most important, <code>&lt;h6&gt;</code> is the least.
+                    Do not skip heading levels — go from <code>&lt;h1&gt;</code> to <code>&lt;h2&gt;</code> to <code>&lt;h3&gt;</code>, not from <code>&lt;h1&gt;</code> to <code>&lt;h4&gt;</code>.
+                </p>
+                <p><strong>Correct hierarchy:</strong></p>
+                <pre><code>&lt;h1&gt;Semantic HTML Learning Hub&lt;/h1&gt;
+    &lt;h2&gt;Page Structure Elements&lt;/h2&gt;
+        &lt;h3&gt;&amp;lt;header&amp;gt;&lt;/h3&gt;
+        &lt;h3&gt;&amp;lt;nav&amp;gt;&lt;/h3&gt;
+    &lt;h2&gt;Text Content Elements&lt;/h2&gt;
+        &lt;h3&gt;&amp;lt;p&amp;gt;&lt;/h3&gt;</code></pre>
+                <p><strong>Incorrect — skipping levels:</strong></p>
+                <pre><code>&lt;h1&gt;Page Title&lt;/h1&gt;
+    &lt;h4&gt;Subsection&lt;/h4&gt;</code></pre>
+                <p><strong>Rule:</strong> Use one <code>&lt;h1&gt;</code> per page. Use headings to represent document structure, not to control text size.</p>
+            </article>
+
+            <article>
+                <h3>All Six Heading Levels — Live Example</h3>
+                <h1>h1 — Page Title</h1>
+                <h2>h2 — Major Section</h2>
+                <h3>h3 — Subsection</h3>
+                <h4>h4 — Sub-subsection</h4>
+                <h5>h5 — Minor heading</h5>
+                <h6>h6 — Smallest heading</h6>
+                <p>Note: The <code>&lt;h1&gt;</code> above is inside an <code>&lt;article&gt;</code> for demonstration only. In a real page, only one <code>&lt;h1&gt;</code> should exist at the page level.</p>
+            </article>
+
+        </section>
+
+        <section id="checklist">
+            <h2>Semantic HTML Checklist</h2>
+            <p>Before finishing any HTML page, ask yourself these questions:</p>
+            <ol>
+                <li>Am I using the correct semantic element for each piece of content?</li>
+                <li>Is my heading hierarchy meaningful and unbroken (h1 → h2 → h3)?</li>
+                <li>Could any of my <code>&lt;div&gt;</code> elements be replaced with a semantic element?</li>
+                <li>Is this content a <code>&lt;section&gt;</code> (part of a whole) or an independent <code>&lt;article&gt;</code>?</li>
+                <li>Am I choosing elements based on <strong>meaning</strong> rather than <strong>appearance</strong>?</li>
+                <li>Is <code>&lt;strong&gt;</code> used for importance, not just for bold text?</li>
+                <li>Is <code>&lt;em&gt;</code> used for stress emphasis, not just for italic text?</li>
+                <li>Do all dates and times use the <code>&lt;time&gt;</code> element with a <code>datetime</code> attribute?</li>
+                <li>Is there exactly one <code>&lt;main&gt;</code> element on the page?</li>
+                <li>Does my <code>&lt;nav&gt;</code> contain only primary or secondary navigation links?</li>
+            </ol>
+            <aside>
+                <p><strong>Final reminder:</strong> Semantic HTML is not about making pages look different. It is about writing code that communicates structure and meaning clearly.</p>
+            </aside>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Semantic HTML Learning Hub &mdash; A beginner HTML learning resource.</p>
+        <address>
+            Part of the <strong>Frontend Learning Hub</strong> series.
+        </address>
+    </footer>
+
+</body>
+
+</html>

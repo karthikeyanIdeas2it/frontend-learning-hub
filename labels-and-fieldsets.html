@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Labels and Fieldsets — Learning Hub</title>
+</head>
+<body>
+
+<header>
+    <h1>HTML Labels and Fieldsets</h1>
+    <p>
+        A beginner-to-advanced learning resource covering <code>&lt;label&gt;</code>,
+        <code>&lt;fieldset&gt;</code>, and <code>&lt;legend&gt;</code> in HTML5 forms.
+        Prerequisite: basic HTML forms, input types, and form validation.
+    </p>
+    <p><strong>Scope:</strong> HTML5 only. No CSS, no JavaScript, no frameworks.</p>
+</header>
+
+<nav>
+    <h2>Contents</h2>
+    <ol>
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#label-element">The label Element</a></li>
+        <li><a href="#explicit">Explicit Label Association</a></li>
+        <li><a href="#implicit">Implicit Label Association</a></li>
+        <li><a href="#labeling-controls">Labeling Different Form Controls</a></li>
+        <li><a href="#checkbox-radio-labels">Labels for Checkbox and Radio Buttons</a></li>
+        <li><a href="#fieldset">What Is fieldset?</a></li>
+        <li><a href="#legend">What Is legend?</a></li>
+        <li><a href="#fieldset-vs-div">Fieldset vs div</a></li>
+        <li><a href="#radio-grouping">Grouping Radio Buttons Correctly</a></li>
+        <li><a href="#checkbox-grouping">Grouping Checkboxes</a></li>
+        <li><a href="#nested">Nested Fieldsets</a></li>
+        <li><a href="#disabled-fieldset">Fieldset and disabled</a></li>
+        <li><a href="#validation">Labels, Fieldsets and Form Validation</a></li>
+        <li><a href="#mistakes">Common Mistakes</a></li>
+        <li><a href="#complete-form">Complete Job Application Example</a></li>
+        <li><a href="#senior">Senior Frontend Perspective</a></li>
+        <li><a href="#interview">Interview Questions</a></li>
+        <li><a href="#checklist">Final Checklist</a></li>
+    </ol>
+</nav>
+
+<main>
+
+<!-- ================================================================
+     SECTION 1 — INTRODUCTION
+================================================================ -->
+<section id="intro">
+    <h2>1. Introduction</h2>
+
+    <article>
+        <h3>What Is a label?</h3>
+        <p>
+            A <code>&lt;label&gt;</code> is an HTML element that provides a visible text description for a
+            form control. It tells the user what information should be entered in the associated field.
+        </p>
+        <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>What Is a fieldset?</h3>
+        <p>
+            A <code>&lt;fieldset&gt;</code> is an HTML element that groups related form controls together
+            into a logical unit. It draws a clear boundary around a set of controls that belong to the
+            same topic or section.
+        </p>
+    </article>
+
+    <article>
+        <h3>What Is a legend?</h3>
+        <p>
+            A <code>&lt;legend&gt;</code> is the caption for a <code>&lt;fieldset&gt;</code>.
+            It appears at the top of the fieldset border and describes what the group of controls represents.
+        </p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    &lt;label for="intro-name"&gt;Full Name&lt;/label&gt;
+    &lt;input id="intro-name" type="text"&gt;
+    &lt;label for="intro-email"&gt;Email&lt;/label&gt;
+    &lt;input id="intro-email" type="email"&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Why Are They Important?</h3>
+        <ul>
+            <li><strong>Labels</strong> — tell users what each field is for. Without them, an input box is meaningless.</li>
+            <li><strong>Fieldsets</strong> — communicate that a group of controls belongs together as a logical unit, making complex forms easier to navigate.</li>
+            <li><strong>Legends</strong> — name the group, so users understand what the fieldset represents.</li>
+        </ul>
+        <p>
+            Together, these elements create form structure that communicates meaning through HTML alone —
+            without relying on visual layout, color, or class names.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 2 — THE LABEL ELEMENT
+================================================================ -->
+<section id="label-element">
+    <h2>2. The label Element</h2>
+
+    <article>
+        <h3>Purpose of label</h3>
+        <p>
+            A label provides a permanently visible, clickable description for a form control.
+            It is the primary way users know what to enter into a field.
+            Every user-facing form control should have a meaningful, associated label.
+        </p>
+    </article>
+
+    <article>
+        <h3>The Relationship Between a Label and a Control</h3>
+        <p>
+            A <code>&lt;label&gt;</code> is linked to its control either through the <code>for</code>
+            attribute (matching the control's <code>id</code>) or by wrapping the control inside the label element.
+            This link is meaningful — clicking the label text focuses or activates the linked control.
+        </p>
+        <pre><code>&lt;label for="fullname"&gt;Full Name&lt;/label&gt;
+&lt;input id="fullname" type="text" name="full_name"&gt;</code></pre>
+        <p>
+            Clicking "Full Name" focuses the text input. This behavior is built into the browser —
+            no JavaScript required.
+        </p>
+    </article>
+
+    <article>
+        <h3>Why Labels Are Better Than Plain Text</h3>
+        <p>Consider the difference:</p>
+        <p>Plain text — no association:</p>
+        <pre><code>Full Name &lt;input type="text" name="full_name"&gt;</code></pre>
+        <p>With a proper label — associated, clickable, meaningful:</p>
+        <pre><code>&lt;label for="fn"&gt;Full Name&lt;/label&gt;
+&lt;input id="fn" type="text" name="full_name"&gt;</code></pre>
+        <p>
+            In the first example, the text "Full Name" is just characters on the page.
+            The browser has no idea it belongs to the input. Clicking it does nothing.
+            In the second, the browser understands the relationship. Clicking the label focuses the input.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 3 — EXPLICIT LABEL ASSOCIATION
+================================================================ -->
+<section id="explicit">
+    <h2>3. Explicit Label Association</h2>
+
+    <article>
+        <h3>How It Works</h3>
+        <p>
+            The <code>for</code> attribute on the <code>&lt;label&gt;</code> must exactly match the
+            <code>id</code> attribute on the form control. The browser uses this match to create the association.
+        </p>
+        <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input id="email" name="email" type="email" required&gt;</code></pre>
+
+        <pre><code>label for="email"
+         ↓
+input id="email"</code></pre>
+    </article>
+
+    <article>
+        <h3>Why the Values Must Correspond</h3>
+        <p>
+            If <code>for</code> and <code>id</code> do not match, the browser cannot connect the label to the input.
+            Clicking the label text will not focus the input. The association is broken — the label is just decorative text.
+        </p>
+        <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="user-email" type="email"&gt;</code></pre>
+        <p>
+            The <code>for</code> value is "email" but the <code>id</code> is "user-email" — they do not match.
+            This label is not associated with any control.
+        </p>
+        <p>Correct version:</p>
+        <pre><code>&lt;label for="user-email"&gt;Email&lt;/label&gt;
+&lt;input id="user-email" name="email" type="email"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Why Unique IDs Matter</h3>
+        <p>
+            An <code>id</code> must be unique within the page. If two elements share the same <code>id</code>,
+            the browser's label association is unpredictable. Always use unique, descriptive <code>id</code> values
+            for every form control.
+        </p>
+    </article>
+
+    <article>
+        <h3>When to Use Explicit Association</h3>
+        <p>
+            Explicit association is the recommended approach. It keeps the label and input as separate elements,
+            which gives full layout flexibility. The label and input can be placed anywhere on the page
+            and the association still works.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 4 — IMPLICIT LABEL ASSOCIATION
+================================================================ -->
+<section id="implicit">
+    <h2>4. Implicit Label Association</h2>
+
+    <article>
+        <h3>How It Works</h3>
+        <p>
+            When the form control is placed <em>inside</em> the <code>&lt;label&gt;</code> element,
+            an implicit association is created. No <code>for</code> or <code>id</code> attributes are needed.
+        </p>
+        <pre><code>&lt;label&gt;
+    Email Address
+    &lt;input type="email" name="email"&gt;
+&lt;/label&gt;</code></pre>
+        <p>The browser understands that the input inside the label is its associated control.</p>
+    </article>
+
+    <article>
+        <h3>Explicit vs Implicit — Comparison</h3>
+        <p><strong>Explicit association:</strong></p>
+        <pre><code>&lt;label for="phone"&gt;Phone Number&lt;/label&gt;
+&lt;input id="phone" type="tel" name="phone"&gt;</code></pre>
+        <p><strong>Implicit association:</strong></p>
+        <pre><code>&lt;label&gt;
+    Phone Number
+    &lt;input type="tel" name="phone"&gt;
+&lt;/label&gt;</code></pre>
+
+        <table>
+            <caption>Explicit vs Implicit Label Association</caption>
+            <thead>
+                <tr><th>Aspect</th><th>Explicit</th><th>Implicit</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Requires for/id</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Label and input can be anywhere</td><td>Yes</td><td>No — input must be inside label</td></tr>
+                <tr><td>Code readability</td><td>Clearer in complex layouts</td><td>Simpler for inline grouping</td></tr>
+                <tr><td>Both are valid HTML5</td><td>Yes</td><td>Yes</td></tr>
+                <tr><td>Recommended for most cases</td><td>Yes</td><td>Use case-by-case</td></tr>
+            </tbody>
+        </table>
+    </article>
+
+    <article>
+        <h3>Advantages and Disadvantages</h3>
+        <p><strong>Explicit — advantages:</strong></p>
+        <ul>
+            <li>Label and input can be separated anywhere in the layout.</li>
+            <li>Clearer association when reading the code.</li>
+            <li>Easier to maintain in large forms.</li>
+        </ul>
+        <p><strong>Implicit — advantages:</strong></p>
+        <ul>
+            <li>No need to manage <code>for</code>/<code>id</code> pairs.</li>
+            <li>Compact — fewer attributes needed.</li>
+            <li>Natural for checkboxes and radio buttons where the label wraps the control.</li>
+        </ul>
+        <aside>
+            <p><strong>Recommendation:</strong> Use explicit association as your default. Use implicit association for checkboxes and radio buttons where wrapping is natural.</p>
+        </aside>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 5 — LABELING DIFFERENT FORM CONTROLS
+================================================================ -->
+<section id="labeling-controls">
+    <h2>5. Labeling Different Form Controls</h2>
+    <p>Every user-facing form control needs a meaningful label. "Enter here" or "Input" are not meaningful. The label should clearly describe what data the field expects.</p>
+
+    <article>
+        <h3>Text, Email, Password, Number, Tel, URL</h3>
+        <pre><code>&lt;label for="lc-name"&gt;Full Name&lt;/label&gt;
+&lt;input id="lc-name" type="text" name="full_name"&gt;
+
+&lt;label for="lc-email"&gt;Email Address&lt;/label&gt;
+&lt;input id="lc-email" type="email" name="email"&gt;
+
+&lt;label for="lc-pwd"&gt;Password (8 characters minimum)&lt;/label&gt;
+&lt;input id="lc-pwd" type="password" name="password" minlength="8"&gt;
+
+&lt;label for="lc-exp"&gt;Years of Experience&lt;/label&gt;
+&lt;input id="lc-exp" type="number" name="experience" min="0" max="50"&gt;
+
+&lt;label for="lc-phone"&gt;Phone Number&lt;/label&gt;
+&lt;input id="lc-phone" type="tel" name="phone" pattern="[0-9]{10}"&gt;
+
+&lt;label for="lc-url"&gt;Portfolio URL&lt;/label&gt;
+&lt;input id="lc-url" type="url" name="portfolio_url" placeholder="https://"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Date and Search</h3>
+        <pre><code>&lt;label for="lc-date"&gt;Available From (Joining Date)&lt;/label&gt;
+&lt;input id="lc-date" type="date" name="joining_date" min="2026-01-01"&gt;
+
+&lt;label for="lc-search"&gt;Search Jobs&lt;/label&gt;
+&lt;input id="lc-search" type="search" name="keyword" placeholder="e.g. Java Developer"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Select</h3>
+        <pre><code>&lt;label for="lc-dept"&gt;Department&lt;/label&gt;
+&lt;select id="lc-dept" name="department"&gt;
+    &lt;option value=""&gt;Select a department&lt;/option&gt;
+    &lt;option value="engineering"&gt;Engineering&lt;/option&gt;
+    &lt;option value="design"&gt;Design&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Textarea</h3>
+        <pre><code>&lt;label for="lc-cover"&gt;Cover Letter&lt;/label&gt;
+&lt;textarea id="lc-cover" name="cover_letter" rows="6"&gt;&lt;/textarea&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>File Input</h3>
+        <pre><code>&lt;label for="lc-resume"&gt;Resume (PDF only)&lt;/label&gt;
+&lt;input id="lc-resume" type="file" name="resume" accept=".pdf"&gt;</code></pre>
+        <p>The label "Resume (PDF only)" gives the user more context than just "Resume" — it communicates the expected format.</p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 6 — LABELS FOR CHECKBOX AND RADIO
+================================================================ -->
+<section id="checkbox-radio-labels">
+    <h2>6. Labels for Checkbox and Radio Buttons</h2>
+
+    <article>
+        <h3>Checkbox — Implicit Association (Wrapping)</h3>
+        <p>The most natural approach for checkboxes — the label wraps the input:</p>
+        <pre><code>&lt;label&gt;
+    &lt;input type="checkbox" name="skills" value="java"&gt;
+    Java
+&lt;/label&gt;
+
+&lt;label&gt;
+    &lt;input type="checkbox" name="skills" value="react"&gt;
+    React
+&lt;/label&gt;</code></pre>
+        <p>Clicking anywhere on the label text — "Java" or "React" — toggles the checkbox.</p>
+    </article>
+
+    <article>
+        <h3>Checkbox — Explicit Association</h3>
+        <pre><code>&lt;input id="skill-java" type="checkbox" name="skills" value="java"&gt;
+&lt;label for="skill-java"&gt;Java&lt;/label&gt;
+
+&lt;input id="skill-react" type="checkbox" name="skills" value="react"&gt;
+&lt;label for="skill-react"&gt;React&lt;/label&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Radio Button — Implicit Association</h3>
+        <pre><code>&lt;label&gt;
+    &lt;input type="radio" name="experience" value="junior"&gt;
+    Junior
+&lt;/label&gt;
+
+&lt;label&gt;
+    &lt;input type="radio" name="experience" value="senior"&gt;
+    Senior
+&lt;/label&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Radio Button — Explicit Association</h3>
+        <pre><code>&lt;input id="exp-junior" type="radio" name="experience" value="junior"&gt;
+&lt;label for="exp-junior"&gt;Junior&lt;/label&gt;
+
+&lt;input id="exp-senior" type="radio" name="experience" value="senior"&gt;
+&lt;label for="exp-senior"&gt;Senior&lt;/label&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Why Labels for Checkboxes and Radios Matter</h3>
+        <p>
+            Without a label, a checkbox or radio button is just a small square or circle on the page —
+            the user has no idea what it represents. The label text is the visible option name.
+            It must clearly identify what the option means.
+        </p>
+        <p>
+            A properly labelled checkbox or radio also has a larger clickable area — the entire label text
+            can be clicked to toggle the control, not just the small input itself.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 7 — WHAT IS FIELDSET?
+================================================================ -->
+<section id="fieldset">
+    <h2>7. What Is fieldset?</h2>
+
+    <article>
+        <h3>Purpose of fieldset</h3>
+        <p>
+            <code>&lt;fieldset&gt;</code> groups related form controls into a logical unit.
+            It communicates to the browser (and through it, to users) that these controls belong together
+            and serve a common purpose. It adds structural meaning to the form.
+        </p>
+    </article>
+
+    <article>
+        <h3>Logical Grouping vs Visual Grouping</h3>
+        <p>
+            A <code>&lt;div&gt;</code> can visually group elements on screen, but it carries no meaning.
+            A <code>&lt;fieldset&gt;</code> declares a <em>logical</em> group — the HTML structure itself
+            communicates that these controls belong together semantically, not just visually.
+        </p>
+    </article>
+
+    <article>
+        <h3>Example — Personal Information Group</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+
+    &lt;label for="fs-name"&gt;Name&lt;/label&gt;
+    &lt;input id="fs-name" type="text" name="full_name"&gt;
+
+    &lt;label for="fs-email"&gt;Email&lt;/label&gt;
+    &lt;input id="fs-email" type="email" name="email"&gt;
+&lt;/fieldset&gt;</code></pre>
+
+        <pre><code>fieldset
+    ↓
+logical group of related controls
+    ↓
+legend
+    ↓
+name/description of that group</code></pre>
+    </article>
+
+    <article>
+        <h3>How Fieldsets Improve Form Organisation</h3>
+        <p>
+            A long form with 20 fields is overwhelming without structure.
+            Grouping fields into "Personal Information", "Professional Information", and "Job Preferences"
+            fieldsets makes the form scannable. A user can quickly identify which section they are in
+            and which fields they still need to complete.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 8 — WHAT IS LEGEND?
+================================================================ -->
+<section id="legend">
+    <h2>8. What Is legend?</h2>
+
+    <article>
+        <h3>Purpose of legend</h3>
+        <p>
+            <code>&lt;legend&gt;</code> provides the caption for its parent <code>&lt;fieldset&gt;</code>.
+            It describes what the group of controls is about. The browser renders it at the top of the
+            fieldset border by default.
+        </p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Employment Information&lt;/legend&gt;
+    ...
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Why a Fieldset Without a Meaningful Legend Loses Context</h3>
+        <p>
+            A fieldset without a legend — or with a vague legend like "Section 2" — does not help the user.
+            They see a group of controls but do not know what topic the group addresses.
+            The legend is the group's name. Without it, the grouping has no meaning.
+        </p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;&lt;/legend&gt;
+    &lt;label for="leg-job"&gt;Job Title&lt;/label&gt;
+    &lt;input id="leg-job" type="text" name="job_title"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>Empty legend — the group is meaningless. Always use a descriptive legend:</p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Professional Information&lt;/legend&gt;
+    &lt;label for="leg-job2"&gt;Job Title&lt;/label&gt;
+    &lt;input id="leg-job2" type="text" name="job_title"&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>The legend Is the Group Label</h3>
+        <p>
+            Think of the relationship this way:
+        </p>
+        <pre><code>Individual control:
+    label → names a single control
+
+Group of controls:
+    legend → names the group (fieldset)</code></pre>
+        <p>
+            A label describes one field. A legend describes a set of fields.
+            They operate at different levels of the form hierarchy.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 9 — FIELDSET VS DIV
+================================================================ -->
+<section id="fieldset-vs-div">
+    <h2>9. Fieldset vs div</h2>
+
+    <article>
+        <h3>Using div to Group Form Controls</h3>
+        <pre><code>&lt;div&gt;
+    &lt;p&gt;Personal Information&lt;/p&gt;
+    &lt;label for="fvd-name"&gt;Name&lt;/label&gt;
+    &lt;input id="fvd-name" type="text" name="full_name"&gt;
+    &lt;label for="fvd-email"&gt;Email&lt;/label&gt;
+    &lt;input id="fvd-email" type="email" name="email"&gt;
+&lt;/div&gt;</code></pre>
+        <p>
+            The <code>&lt;div&gt;</code> is a generic container. The <code>&lt;p&gt;</code> is just a paragraph.
+            The browser has no way to know this is a logical group of form controls related to personal information.
+            These are just elements next to each other.
+        </p>
+    </article>
+
+    <article>
+        <h3>Using fieldset to Group Form Controls</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    &lt;label for="fvd-name2"&gt;Name&lt;/label&gt;
+    &lt;input id="fvd-name2" type="text" name="full_name"&gt;
+    &lt;label for="fvd-email2"&gt;Email&lt;/label&gt;
+    &lt;input id="fvd-email2" type="email" name="email"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>
+            The <code>&lt;fieldset&gt;</code> element declares a logical group of form controls.
+            The <code>&lt;legend&gt;</code> names the group.
+            The HTML structure itself communicates the relationship — not CSS classes or visual proximity.
+        </p>
+    </article>
+
+    <article>
+        <h3>When to Use fieldset vs div</h3>
+        <table>
+            <caption>fieldset vs div for form grouping</caption>
+            <thead>
+                <tr><th>Scenario</th><th>Use</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Grouping related form controls under a common topic</td><td><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></td></tr>
+                <tr><td>Grouping radio buttons or checkboxes</td><td><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></td></tr>
+                <tr><td>Layout wrapper with no semantic meaning</td><td><code>&lt;div&gt;</code></td></tr>
+                <tr><td>Grouping non-form content</td><td><code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, or other semantic elements</td></tr>
+            </tbody>
+        </table>
+        <aside>
+            <p><strong>Rule:</strong> Use <code>&lt;fieldset&gt;</code> when you are grouping form controls that logically belong together. Use <code>&lt;div&gt;</code> only when there is no semantic element that fits.</p>
+        </aside>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 10 — GROUPING RADIO BUTTONS
+================================================================ -->
+<section id="radio-grouping">
+    <h2>10. Grouping Radio Buttons Correctly</h2>
+
+    <article>
+        <h3>Why Radio Buttons Need a fieldset</h3>
+        <p>
+            Radio buttons with the same <code>name</code> form a logical group — only one can be selected.
+            But the <code>name</code> attribute is invisible to the user. The <code>&lt;fieldset&gt;</code>
+            and <code>&lt;legend&gt;</code> make the group visually and semantically explicit.
+            Without them, a user sees a list of options with no context about what they are choosing between.
+        </p>
+    </article>
+
+    <article>
+        <h3>Complete Example — Experience Level</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+
+    &lt;label&gt;
+        &lt;input
+            type="radio"
+            name="experience"
+            value="junior"
+        &gt;
+        Junior (0–2 years)
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;input
+            type="radio"
+            name="experience"
+            value="mid"
+        &gt;
+        Mid-Level (3–5 years)
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;input
+            type="radio"
+            name="experience"
+            value="senior"
+        &gt;
+        Senior (6+ years)
+    &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>How Each Concept Contributes</h3>
+        <pre><code>fieldset → declares the logical group of radio buttons
+legend   → names the group: "Experience Level"
+name     → links radio buttons so only one can be selected
+label    → names each individual option: "Junior", "Mid-Level", "Senior"</code></pre>
+        <p>All four are working together. Remove any one of them and the form loses clarity or correctness.</p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 11 — GROUPING CHECKBOXES
+================================================================ -->
+<section id="checkbox-grouping">
+    <h2>11. Grouping Checkboxes</h2>
+
+    <article>
+        <h3>Complete Example — Technical Skills</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Technical Skills&lt;/legend&gt;
+
+    &lt;label&gt;
+        &lt;input type="checkbox" name="skills" value="java"&gt;
+        Java
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;input type="checkbox" name="skills" value="react"&gt;
+        React
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;input type="checkbox" name="skills" value="spring"&gt;
+        Spring Boot
+    &lt;/label&gt;
+
+    &lt;label&gt;
+        &lt;input type="checkbox" name="skills" value="nodejs"&gt;
+        Node.js
+    &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>The Two Levels of Description</h3>
+        <p>
+            The <code>&lt;legend&gt;</code> "Technical Skills" describes the <em>entire group</em> — it tells the user
+            what the collection of checkboxes represents.
+        </p>
+        <p>
+            Each <code>&lt;label&gt;</code> — "Java", "React", "Spring Boot" — describes an
+            <em>individual option</em> within that group.
+        </p>
+        <p>
+            Without the legend, a user sees three checkboxes with labels "Java", "React", "Spring Boot" —
+            but does not know whether these are skills to select, technologies to exclude, or something else entirely.
+            The legend provides that context.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 12 — NESTED FIELDSETS
+================================================================ -->
+<section id="nested">
+    <h2>12. Nested Fieldsets</h2>
+
+    <article>
+        <h3>Can Fieldsets Be Nested?</h3>
+        <p>
+            Yes, HTML5 allows fieldsets to be nested inside other fieldsets.
+            Nesting is appropriate when the form has a genuinely hierarchical logical structure —
+            a subgroup that belongs within a larger group.
+        </p>
+    </article>
+
+    <article>
+        <h3>Example — Job Application with Nested Fieldsets</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Job Application&lt;/legend&gt;
+
+    &lt;fieldset&gt;
+        &lt;legend&gt;Personal Information&lt;/legend&gt;
+        &lt;label for="nest-name"&gt;Full Name&lt;/label&gt;
+        &lt;input id="nest-name" type="text" name="full_name"&gt;
+        &lt;label for="nest-email"&gt;Email&lt;/label&gt;
+        &lt;input id="nest-email" type="email" name="email"&gt;
+    &lt;/fieldset&gt;
+
+    &lt;fieldset&gt;
+        &lt;legend&gt;Professional Information&lt;/legend&gt;
+
+        &lt;label for="nest-title"&gt;Job Title&lt;/label&gt;
+        &lt;input id="nest-title" type="text" name="job_title"&gt;
+
+        &lt;fieldset&gt;
+            &lt;legend&gt;Technical Skills&lt;/legend&gt;
+            &lt;label&gt;&lt;input type="checkbox" name="skills" value="java"&gt; Java&lt;/label&gt;
+            &lt;label&gt;&lt;input type="checkbox" name="skills" value="react"&gt; React&lt;/label&gt;
+        &lt;/fieldset&gt;
+
+    &lt;/fieldset&gt;
+
+&lt;/fieldset&gt;</code></pre>
+
+        <pre><code>Job Application (outer fieldset)
+├── Personal Information (inner fieldset)
+│   ├── Full Name
+│   └── Email
+└── Professional Information (inner fieldset)
+    ├── Job Title
+    └── Technical Skills (nested fieldset)
+        ├── Java
+        └── React</code></pre>
+    </article>
+
+    <article>
+        <h3>When Nesting Becomes Unnecessary or Confusing</h3>
+        <p>
+            Nesting fieldsets more than two levels deep is rarely appropriate. Deeply nested fieldsets
+            add visual complexity without adding meaningful structure. Before nesting, ask:
+            "Is this group genuinely a subgroup of the parent group, or is it just a separate section?"
+            If it is a separate section, use a sibling fieldset instead.
+        </p>
+        <aside>
+            <p><strong>Rule:</strong> Nest fieldsets only when the hierarchy genuinely exists in the data. Flat, sibling fieldsets are usually cleaner than deep nesting.</p>
+        </aside>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 13 — FIELDSET AND DISABLED
+================================================================ -->
+<section id="disabled-fieldset">
+    <h2>13. Fieldset and disabled</h2>
+
+    <article>
+        <h3>What Happens When a Fieldset Is Disabled</h3>
+        <p>
+            When <code>disabled</code> is applied to a <code>&lt;fieldset&gt;</code>, all form controls
+            inside it are disabled automatically — as if each control had its own <code>disabled</code> attribute.
+        </p>
+        <pre><code>&lt;fieldset disabled&gt;
+    &lt;legend&gt;Previous Employment (Not Applicable)&lt;/legend&gt;
+
+    &lt;label for="prev-company"&gt;Company Name&lt;/label&gt;
+    &lt;input id="prev-company" type="text" name="prev_company"&gt;
+
+    &lt;label for="prev-role"&gt;Role&lt;/label&gt;
+    &lt;input id="prev-role" type="text" name="prev_role"&gt;
+
+    &lt;label for="prev-years"&gt;Years Worked&lt;/label&gt;
+    &lt;input id="prev-years" type="number" name="prev_years" min="0"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>All three inputs are disabled. They are not focusable, not editable, and their values are not submitted.</p>
+    </article>
+
+    <article>
+        <h3>Practical Use Cases</h3>
+        <ul>
+            <li>A "Previous Employment" section that becomes inactive when the user selects "Fresher."</li>
+            <li>A "Billing Address" section that becomes inactive when "Same as shipping address" is checked.</li>
+            <li>Any form section that is conditionally irrelevant based on earlier choices.</li>
+        </ul>
+    </article>
+
+    <article>
+        <h3>fieldset disabled vs Disabling Each Control Individually</h3>
+        <table>
+            <caption>Disabling a group — fieldset vs individual controls</caption>
+            <thead>
+                <tr><th>Approach</th><th>Code</th><th>Effect</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Disable fieldset</td>
+                    <td><code>&lt;fieldset disabled&gt;</code></td>
+                    <td>All child controls disabled at once</td>
+                </tr>
+                <tr>
+                    <td>Disable individually</td>
+                    <td><code>&lt;input disabled&gt;</code> on each</td>
+                    <td>Each control disabled separately</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Disabling the <code>&lt;fieldset&gt;</code> is simpler and guarantees every control in the group is disabled — even controls added later. It is the preferred approach when the entire group should be inactive.</p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 14 — LABELS, FIELDSETS AND VALIDATION
+================================================================ -->
+<section id="validation">
+    <h2>14. Labels, Fieldsets and Form Validation</h2>
+
+    <article>
+        <h3>How These Concepts Work Together</h3>
+        <p>
+            Labels, fieldsets, and validation attributes are all separate concerns that work on the same form controls simultaneously.
+            They do not conflict — they complement each other.
+        </p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Contact Information&lt;/legend&gt;
+
+    &lt;label for="v-email"&gt;Email Address (required)&lt;/label&gt;
+    &lt;input
+        id="v-email"
+        name="email"
+        type="email"
+        required
+    &gt;
+
+    &lt;label for="v-phone"&gt;Phone Number (required, 10 digits)&lt;/label&gt;
+    &lt;input
+        id="v-phone"
+        name="phone"
+        type="tel"
+        required
+        pattern="[0-9]{10}"
+        title="Enter a 10-digit phone number"
+    &gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>What Each Element Contributes</h3>
+        <ul>
+            <li><strong>fieldset</strong> — declares that Email and Phone belong to the same logical group (Contact Information).</li>
+            <li><strong>legend</strong> — names the group "Contact Information" so the user knows the context.</li>
+            <li><strong>label</strong> — tells the user what each individual field is for ("Email Address", "Phone Number").</li>
+            <li><strong>type="email"</strong> — provides built-in format validation for the email field.</li>
+            <li><strong>required</strong> — marks both fields as mandatory.</li>
+            <li><strong>pattern</strong> — adds format validation for the phone number.</li>
+        </ul>
+        <p>Each concern is handled by the right element or attribute. No element is doing another's job.</p>
+    </article>
+
+    <article>
+        <h3>Validation Attributes Apply to Individual Controls</h3>
+        <p>
+            <code>required</code>, <code>pattern</code>, <code>min</code>, <code>maxlength</code> and other
+            validation attributes are placed on the <code>&lt;input&gt;</code> or <code>&lt;textarea&gt;</code>
+            element — not on the <code>&lt;fieldset&gt;</code> or <code>&lt;label&gt;</code>.
+            The fieldset and legend provide grouping context.
+            The label provides the field description.
+            The validation attributes define the rules.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 15 — COMMON MISTAKES
+================================================================ -->
+<section id="mistakes">
+    <h2>15. Common Mistakes</h2>
+
+    <article>
+        <h3>Mistake 1 — Missing Label</h3>
+        <pre><code>&lt;input type="email" name="email"&gt;</code></pre>
+        <p>The user sees an empty input box with no description. They do not know what to enter.</p>
+        <pre><code>&lt;label for="m1-email"&gt;Email Address&lt;/label&gt;
+&lt;input id="m1-email" type="email" name="email"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Mistake 2 — Incorrect for/id Pairing</h3>
+        <pre><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="username" type="email" name="email"&gt;</code></pre>
+        <p>The <code>for</code> value "email" does not match the <code>id</code> "username". The label is not associated with the input — clicking the label does nothing.</p>
+        <pre><code>&lt;label for="m2-email"&gt;Email&lt;/label&gt;
+&lt;input id="m2-email" type="email" name="email"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Mistake 3 — Placeholder Used as the Label</h3>
+        <pre><code>&lt;input type="email" name="email" placeholder="Enter email"&gt;</code></pre>
+        <p>When the user starts typing, the placeholder disappears. They can no longer see what the field is for.</p>
+        <pre><code>&lt;label for="m3-email"&gt;Email Address&lt;/label&gt;
+&lt;input id="m3-email" type="email" name="email" placeholder="you@example.com"&gt;</code></pre>
+        <p>The label is always visible. The placeholder is an additional hint, not a replacement.</p>
+    </article>
+
+    <article>
+        <h3>Mistake 4 — Using div to Group Radio Buttons</h3>
+        <pre><code>&lt;div&gt;
+    &lt;p&gt;Experience Level&lt;/p&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="senior"&gt; Senior&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        <p>The <code>&lt;div&gt;</code> provides no semantic grouping. "Experience Level" is just a paragraph — not a group description.</p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="senior"&gt; Senior&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Mistake 5 — Missing legend</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;input type="text" name="job_title"&gt;
+    &lt;input type="text" name="company"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>The fieldset groups the controls but gives no name to the group. Users cannot tell what this section is about.</p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Current Employment&lt;/legend&gt;
+    &lt;label for="m5-title"&gt;Job Title&lt;/label&gt;
+    &lt;input id="m5-title" type="text" name="job_title"&gt;
+    &lt;label for="m5-company"&gt;Company&lt;/label&gt;
+    &lt;input id="m5-company" type="text" name="company"&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>Mistake 6 — One Fieldset for Unrelated Controls</h3>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;All Information&lt;/legend&gt;
+    &lt;input type="text" name="full_name"&gt;
+    &lt;input type="email" name="email"&gt;
+    &lt;input type="text" name="job_title"&gt;
+    &lt;input type="file" name="resume"&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>Name and email are personal information. Job title and resume are professional information. Grouping them all together removes meaningful structure.</p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Personal Information&lt;/legend&gt;
+    &lt;label for="m6-name"&gt;Full Name&lt;/label&gt;
+    &lt;input id="m6-name" type="text" name="full_name"&gt;
+    &lt;label for="m6-email"&gt;Email&lt;/label&gt;
+    &lt;input id="m6-email" type="email" name="email"&gt;
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+    &lt;legend&gt;Professional Information&lt;/legend&gt;
+    &lt;label for="m6-title"&gt;Job Title&lt;/label&gt;
+    &lt;input id="m6-title" type="text" name="job_title"&gt;
+    &lt;label for="m6-resume"&gt;Resume (PDF)&lt;/label&gt;
+    &lt;input id="m6-resume" type="file" name="resume" accept=".pdf"&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 16 — COMPLETE JOB APPLICATION EXAMPLE
+================================================================ -->
+<section id="complete-form">
+    <h2>16. Complete Job Application Example</h2>
+    <p>Study the structure carefully. Every control has a label. Every logical group has a fieldset and legend.</p>
+
+    <form action="/apply" method="post" enctype="multipart/form-data">
+
+        <fieldset>
+            <legend>Personal Information</legend>
+
+            <label for="app-fullname">Full Name (required)</label>
+            <input id="app-fullname" type="text" name="full_name"
+                required minlength="2" maxlength="100" autocomplete="name">
+
+            <label for="app-email">Email Address (required)</label>
+            <input id="app-email" type="email" name="email"
+                required autocomplete="email">
+
+            <label for="app-phone">Phone Number (required, 10 digits)</label>
+            <input id="app-phone" type="tel" name="phone"
+                required pattern="[0-9]{10}"
+                title="Enter a 10-digit phone number"
+                placeholder="9876543210" autocomplete="tel">
+        </fieldset>
+
+        <fieldset>
+            <legend>Professional Information</legend>
+
+            <label for="app-jobtitle">Job Title Applying For (required)</label>
+            <input id="app-jobtitle" type="text" name="job_title"
+                required minlength="3" maxlength="100"
+                list="job-title-list">
+            <datalist id="job-title-list">
+                <option value="Java Developer">
+                <option value="Spring Boot Developer">
+                <option value="React Developer">
+                <option value="Full Stack Developer">
+            </datalist>
+
+            <label for="app-exp">Years of Experience (required)</label>
+            <input id="app-exp" type="number" name="experience_years"
+                required min="0" max="50" step="1">
+
+            <fieldset>
+                <legend>Experience Level (required)</legend>
+                <label><input type="radio" name="exp_level" value="junior" required> Junior (0–2 years)</label>
+                <label><input type="radio" name="exp_level" value="mid"> Mid-Level (3–5 years)</label>
+                <label><input type="radio" name="exp_level" value="senior"> Senior (6+ years)</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Technical Skills</legend>
+                <label><input type="checkbox" name="skills" value="java"> Java</label>
+                <label><input type="checkbox" name="skills" value="spring"> Spring Boot</label>
+                <label><input type="checkbox" name="skills" value="react"> React</label>
+                <label><input type="checkbox" name="skills" value="nodejs"> Node.js</label>
+                <label><input type="checkbox" name="skills" value="devops"> DevOps</label>
+            </fieldset>
+        </fieldset>
+
+        <fieldset>
+            <legend>Job Preferences</legend>
+
+            <label for="app-emptype">Employment Type (required)</label>
+            <select id="app-emptype" name="employment_type" required>
+                <option value="">Select employment type</option>
+                <option value="fulltime-onsite">Full Time Onsite</option>
+                <option value="fulltime-remote">Full Time Remote</option>
+                <option value="fulltime-hybrid">Full Time Hybrid</option>
+                <option value="contract">Contract</option>
+            </select>
+
+            <label for="app-location">Preferred Location</label>
+            <input id="app-location" type="text" name="preferred_location"
+                placeholder="e.g. Bangalore, Chennai, Remote"
+                list="location-list">
+            <datalist id="location-list">
+                <option value="Bangalore">
+                <option value="Chennai">
+                <option value="Hyderabad">
+                <option value="Remote">
+            </datalist>
+        </fieldset>
+
+        <fieldset>
+            <legend>Resume</legend>
+            <label for="app-resume">Upload Resume (PDF, required)</label>
+            <input id="app-resume" type="file" name="resume"
+                required accept=".pdf">
+        </fieldset>
+
+        <input type="hidden" name="job_ref" value="JOB-2026-001">
+
+        <button type="submit">Submit Application</button>
+        <button type="reset">Reset Form</button>
+
+    </form>
+</section>
+
+<!-- ================================================================
+     SECTION 17 — SENIOR FRONTEND PERSPECTIVE
+================================================================ -->
+<section id="senior">
+    <h2>17. Senior Frontend Perspective</h2>
+
+    <article>
+        <h3>Labels Are Part of Good Form Architecture</h3>
+        <p>
+            A form without labels is incomplete. Labels are not optional decoration —
+            they are the primary mechanism by which users understand what each field expects.
+            A senior developer treats every unlabelled input as a bug, not a minor omission.
+        </p>
+    </article>
+
+    <article>
+        <h3>Why for and id Are Important</h3>
+        <p>
+            The <code>for</code>/<code>id</code> pairing is a semantic contract in HTML.
+            It declares a relationship between two elements.
+            This relationship is used by the browser to enlarge click targets, and by assistive technologies
+            to announce field names. Breaking this pairing silently breaks form functionality for many users.
+        </p>
+    </article>
+
+    <article>
+        <h3>Fieldsets Represent Logical Grouping, Not Visual Grouping</h3>
+        <p>
+            A <code>&lt;fieldset&gt;</code> communicates meaning — these controls belong together logically.
+            CSS can create the same visual box around elements without any semantic meaning.
+            A senior developer chooses <code>&lt;fieldset&gt;</code> when the grouping is structural,
+            not merely cosmetic.
+        </p>
+    </article>
+
+    <article>
+        <h3>Legends Provide Context for Groups</h3>
+        <p>
+            In a form with many fieldsets, the legend is the user's navigation aid.
+            "You are in Personal Information. You are now in Professional Information."
+            Without legends, a user filling out a long form loses their place.
+        </p>
+    </article>
+
+    <article>
+        <h3>Why Native HTML Semantics Should Be Preferred</h3>
+        <p>
+            Native HTML elements — <code>&lt;label&gt;</code>, <code>&lt;fieldset&gt;</code>,
+            <code>&lt;legend&gt;</code> — carry meaning that the browser understands natively.
+            Custom <code>&lt;div&gt;</code>-based equivalents require JavaScript to replicate
+            what the browser provides for free.
+            A senior developer reaches for the right HTML element first.
+        </p>
+    </article>
+
+    <article>
+        <h3>Why div Should Not Replace Semantic Form Elements</h3>
+        <p>
+            Using <code>&lt;div class="label"&gt;</code> instead of <code>&lt;label&gt;</code>,
+            or <code>&lt;div class="fieldset"&gt;</code> instead of <code>&lt;fieldset&gt;</code>,
+            creates a form that looks correct on screen but loses all semantic structure.
+            The HTML source communicates nothing about the form's intent.
+            This makes the code harder to understand, harder to test, and harder to adapt.
+        </p>
+    </article>
+
+    <article>
+        <h3>How Good HTML Structure Makes Future Work Easier</h3>
+        <p>
+            A well-structured HTML form is easier to style with CSS — selectors can target
+            <code>fieldset</code>, <code>legend</code>, and <code>label</code> directly without needing
+            class names on every element. It is easier to enhance with JavaScript — form controls are
+            accessible via the DOM using standard selectors. It is easier to migrate to React or another
+            framework — the component boundaries naturally map to the existing fieldset groupings.
+            Good HTML structure is an investment that pays dividends across the entire frontend stack.
+        </p>
+    </article>
+</section>
+
+<!-- ================================================================
+     SECTION 18 — INTERVIEW QUESTIONS
+================================================================ -->
+<section id="interview">
+    <h2>18. Interview Questions</h2>
+
+    <section>
+        <h3>Beginner</h3>
+
+        <details>
+            <summary>What is the purpose of the label element?</summary>
+            <p>
+                <code>&lt;label&gt;</code> provides a visible, permanently displayed text description for a form control.
+                It tells users what data to enter in the associated field.
+                When properly associated, clicking the label text focuses or activates the linked control,
+                enlarging the effective click/tap target.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is fieldset?</summary>
+            <p>
+                <code>&lt;fieldset&gt;</code> is an HTML element that groups related form controls into a logical unit.
+                It communicates to the browser and users that the enclosed controls belong together and serve a common purpose.
+                It renders a visual border around the group by default.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is legend?</summary>
+            <p>
+                <code>&lt;legend&gt;</code> is the caption element for a <code>&lt;fieldset&gt;</code>.
+                It provides the name or description of the group of controls.
+                It is the first child of a <code>&lt;fieldset&gt;</code> and renders at the top of the fieldset border.
+            </p>
+        </details>
+
+        <details>
+            <summary>Why do forms need labels?</summary>
+            <p>
+                Without labels, an input box is meaningless — the user cannot tell what information to enter.
+                Labels provide context, improve usability by enlarging the clickable area,
+                and are required for form controls to be correctly identified.
+            </p>
+        </details>
+
+        <details>
+            <summary>What happens when you click a label?</summary>
+            <p>
+                Clicking a properly associated label focuses the linked input (for text inputs) or toggles it
+                (for checkboxes and radio buttons). This behavior is built into the browser.
+                No JavaScript is required.
+            </p>
+        </details>
+    </section>
+
+    <section>
+        <h3>Intermediate</h3>
+
+        <details>
+            <summary>How does for relate to id?</summary>
+            <p>
+                The <code>for</code> attribute on a <code>&lt;label&gt;</code> must exactly match the
+                <code>id</code> attribute on the associated form control.
+                The browser uses this match to create the association between the label and its control.
+                If they do not match, the label is not connected to any control.
+            </p>
+        </details>
+
+        <details>
+            <summary>Can a label contain an input?</summary>
+            <p>
+                Yes. Placing an input inside a label creates implicit association — no <code>for</code> or
+                <code>id</code> attributes are needed. The browser understands that the input inside the label
+                is its associated control. This is commonly used for checkboxes and radio buttons.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is explicit label association?</summary>
+            <p>
+                Explicit association uses the <code>for</code> attribute on the <code>&lt;label&gt;</code>
+                to reference the <code>id</code> of the control.
+                The label and input are separate elements in the DOM.
+                Clicking the label focuses the input regardless of their position in the layout.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is implicit label association?</summary>
+            <p>
+                Implicit association occurs when the form control is placed inside the <code>&lt;label&gt;</code> element.
+                No <code>for</code> or <code>id</code> is needed.
+                The browser treats the enclosed control as the label's associated control.
+            </p>
+        </details>
+
+        <details>
+            <summary>Why shouldn't placeholder replace a label?</summary>
+            <p>
+                A placeholder disappears as soon as the user starts typing, leaving no visible description of the field.
+                Users may forget what the field is for, especially if they tab away and return.
+                A <code>&lt;label&gt;</code> remains permanently visible.
+                Placeholder text should be an additional hint, not a substitute for a label.
+            </p>
+        </details>
+
+        <details>
+            <summary>When should you use fieldset instead of div?</summary>
+            <p>
+                Use <code>&lt;fieldset&gt;</code> when you are grouping form controls that logically belong together —
+                for example, Personal Information, Skills, or Address.
+                Use <code>&lt;div&gt;</code> when you need a generic wrapper for layout purposes without any semantic meaning.
+                For radio buttons and checkboxes, <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code>
+                is always the correct choice.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is the difference between a label and a legend?</summary>
+            <p>
+                A <code>&lt;label&gt;</code> describes a single form control — "Email Address", "Phone Number".
+                A <code>&lt;legend&gt;</code> describes a group of form controls (a fieldset) — "Contact Information", "Technical Skills".
+                They operate at different levels: label at the individual field level, legend at the group level.
+            </p>
+        </details>
+    </section>
+
+    <section>
+        <h3>Advanced</h3>
+
+        <details>
+            <summary>Why should radio buttons be grouped in a fieldset?</summary>
+            <p>
+                Radio buttons with the same <code>name</code> form a logical group where only one can be selected.
+                The <code>name</code> attribute is invisible to the user.
+                A <code>&lt;fieldset&gt;</code> with a <code>&lt;legend&gt;</code> makes the group visible
+                and named — "Experience Level: Junior / Mid / Senior" — giving users the context to understand
+                what they are choosing between.
+                Without a fieldset, a user sees radio buttons with no explanation of what the group represents.
+            </p>
+        </details>
+
+        <details>
+            <summary>What role does name play in radio buttons?</summary>
+            <p>
+                The <code>name</code> attribute links radio buttons into a group.
+                All radio buttons sharing the same <code>name</code> are mutually exclusive —
+                selecting one deselects all others in the group.
+                The <code>name</code> is also the key submitted to the server.
+                Without a matching <code>name</code>, radio buttons behave independently and are unrelated.
+            </p>
+        </details>
+
+        <details>
+            <summary>What happens when a fieldset is disabled?</summary>
+            <p>
+                When <code>disabled</code> is applied to a <code>&lt;fieldset&gt;</code>,
+                all form controls inside it are disabled as a group.
+                They become non-focusable, non-editable, and their values are excluded from form submission.
+                This is equivalent to adding <code>disabled</code> to every individual control,
+                but is simpler and applies to all controls in the group — including any added later.
+            </p>
+        </details>
+
+        <details>
+            <summary>Can fieldsets be nested?</summary>
+            <p>
+                Yes, HTML5 permits nested fieldsets. Nesting is appropriate when the form has a genuine
+                hierarchical structure — for example, a "Professional Information" fieldset that contains
+                a nested "Technical Skills" fieldset.
+                Avoid deep nesting (more than two levels) as it adds visual complexity without adding clarity.
+                Use sibling fieldsets when sections are parallel, not hierarchical.
+            </p>
+        </details>
+
+        <details>
+            <summary>Why is logical grouping important in complex forms?</summary>
+            <p>
+                A form with many fields is cognitively demanding without structure.
+                Logical grouping via <code>&lt;fieldset&gt;</code> breaks the form into named sections,
+                allowing users to scan, understand where they are, and complete one section before moving to the next.
+                Without structure, all fields look equally important and unrelated to each other.
+            </p>
+        </details>
+
+        <details>
+            <summary>How do labels and fieldsets contribute to form structure?</summary>
+            <p>
+                Labels describe individual controls. Fieldsets group related controls. Legends name groups.
+                Together, they create a two-level information hierarchy:
+                the group level (fieldset + legend) and the field level (label + control).
+                This hierarchy makes forms understandable at a glance and communicates the form's structure
+                through HTML semantics rather than relying on visual layout or CSS.
+            </p>
+        </details>
+
+        <details>
+            <summary>What is the practical difference between disabled on fieldset vs on individual controls?</summary>
+            <p>
+                <code>disabled</code> on a <code>&lt;fieldset&gt;</code> disables all current and future child controls
+                in a single declaration. <code>disabled</code> on individual controls must be applied to each one separately.
+                If a new control is added to a disabled fieldset, it is automatically disabled.
+                If individual controls are disabled separately, a newly added control will not be disabled
+                unless explicitly given the <code>disabled</code> attribute.
+            </p>
+        </details>
+
+        <details>
+            <summary>Why should a fieldset always have a meaningful legend?</summary>
+            <p>
+                The legend is the group's name. Without it, the fieldset provides visual grouping but no semantic description.
+                A user entering the group — especially by keyboard navigation — cannot tell what section they are in.
+                A vague legend like "Section 1" is almost as bad as no legend.
+                The legend should clearly identify the topic of the group: "Personal Information", "Technical Skills", "Employment History".
+            </p>
+        </details>
+    </section>
+</section>
+
+<!-- ================================================================
+     SECTION 19 — FINAL CHECKLIST
+================================================================ -->
+<section id="checklist">
+    <h2>19. Final Checklist</h2>
+    <p>Check each item when you are confident you understand it:</p>
+    <ul>
+        <li>Understand the <code>&lt;label&gt;</code> element and its purpose</li>
+        <li>Understand <code>for</code> and <code>id</code> — how they create explicit association</li>
+        <li>Understand explicit label association — separate label and input elements</li>
+        <li>Understand implicit label association — input nested inside label</li>
+        <li>Know how to label text, email, password, number, tel, url, date, search, select, textarea, and file inputs</li>
+        <li>Know how to label checkbox and radio controls correctly</li>
+        <li>Understand the <code>&lt;fieldset&gt;</code> element and logical grouping</li>
+        <li>Understand the <code>&lt;legend&gt;</code> element as the group caption</li>
+        <li>Understand logical form grouping vs visual grouping</li>
+        <li>Understand fieldset vs div — when to use each</li>
+        <li>Understand how to group radio buttons with fieldset and legend</li>
+        <li>Understand how to group checkboxes with fieldset and legend</li>
+        <li>Understand nested fieldsets — when appropriate and when to avoid</li>
+        <li>Understand disabled fieldset — how it affects all child controls</li>
+        <li>Understand how labels, fieldsets, and validation attributes work together</li>
+        <li>Know the common labeling and fieldset mistakes and how to avoid them</li>
+        <li>Build a properly structured Job Application Form using fieldset, legend, and label</li>
+    </ul>
+    <aside>
+        <p>
+            <strong>You are ready for the next topic when</strong> you can rebuild the Job Application Form
+            in Section 16 from memory — every control labelled, every group in a fieldset with a legend —
+            and explain why each element is used.
+        </p>
+    </aside>
+</section>
+
+</main>
+
+<footer>
+    <p>HTML Labels and Fieldsets &mdash; Frontend Learning Hub</p>
+    <address>Part of the Frontend Learning Hub series.</address>
+    <p><a href="#intro">Back to top</a></p>
+</footer>
+
+</body>
+</html>

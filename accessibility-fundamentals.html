@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Accessibility Fundamentals — Learning Hub</title>
+</head>
+<body>
+<header>
+    <h1>Web Accessibility Fundamentals</h1>
+    <p>Beginner-to-advanced. Prerequisites: semantic HTML, forms, validation, labels, fieldsets.</p>
+    <p><strong>Scope:</strong> HTML5 only. ARIA is a separate topic.</p>
+</header>
+<nav>
+    <h2>Contents</h2>
+    <ol>
+        <li><a href="#what-is">What Is Web Accessibility?</a></li>
+        <li><a href="#why">Why Accessibility Matters</a></li>
+        <li><a href="#semantic">Accessibility and Semantic HTML</a></li>
+        <li><a href="#keyboard">Keyboard Accessibility</a></li>
+        <li><a href="#focus">Focus Fundamentals</a></li>
+        <li><a href="#screen-readers">Screen Readers</a></li>
+        <li><a href="#a11y-tree">Accessibility Tree</a></li>
+        <li><a href="#names">Accessible Names</a></li>
+        <li><a href="#headings">Headings and Accessibility</a></li>
+        <li><a href="#links-buttons">Links vs Buttons</a></li>
+        <li><a href="#images">Images and alt Text</a></li>
+        <li><a href="#forms">Forms and Accessibility</a></li>
+        <li><a href="#grouping">Accessible Form Grouping</a></li>
+        <li><a href="#tables">Accessible Tables</a></li>
+        <li><a href="#language">Language and Document Metadata</a></li>
+        <li><a href="#content">Accessible Content</a></li>
+        <li><a href="#native">Native HTML First</a></li>
+        <li><a href="#mistakes">Common Accessibility Mistakes</a></li>
+        <li><a href="#testing">Accessibility Testing</a></li>
+        <li><a href="#wcag">WCAG — Introduction</a></li>
+        <li><a href="#job-portal">Accessible Job Portal Example</a></li>
+        <li><a href="#before-after">Before vs After</a></li>
+        <li><a href="#senior">Senior Frontend Perspective</a></li>
+        <li><a href="#interview">Interview Questions</a></li>
+        <li><a href="#checklist">Final Checklist</a></li>
+    </ol>
+</nav>
+<main>
+
+<section id="what-is">
+    <h2>1. What Is Web Accessibility?</h2>
+    <p>Web accessibility means building websites so that as many people as reasonably possible can perceive, understand, navigate, and interact with them — regardless of their abilities or circumstances.</p>
+    <article>
+        <h3>Who Benefits</h3>
+        <ul>
+            <li><strong>Visual</strong> — blind, low vision, colour blindness. Use screen readers and magnifiers.</li>
+            <li><strong>Auditory</strong> — deaf or hard of hearing. Rely on captions and text alternatives.</li>
+            <li><strong>Motor</strong> — limited hand movement. Use keyboard-only, switch access, or voice control.</li>
+            <li><strong>Cognitive</strong> — dyslexia, ADHD. Benefit from clear language and consistent structure.</li>
+            <li><strong>Temporary</strong> — broken arm, eye infection. Same barriers as permanent conditions.</li>
+            <li><strong>Situational</strong> — bright sunlight, noisy room, slow connection.</li>
+        </ul>
+        <aside><p><strong>Key idea:</strong> Accessibility benefits everyone, not only people with permanent disabilities.</p></aside>
+    </article>
+</section>
+
+<section id="why">
+    <h2>2. Why Accessibility Matters</h2>
+    <ul>
+        <li>Improves usability for all users — captions help people in noisy environments, clear headings help everyone scan.</li>
+        <li>Forces correct semantic HTML, meaningful labels, and logical structure — improving code quality.</li>
+        <li>Required by law in many jurisdictions (ADA in the US, European Accessibility Act in the EU).</li>
+        <li>Accessibility and good UX reinforce each other — solving one often improves the other.</li>
+    </ul>
+</section>
+
+<section id="semantic">
+    <h2>3. Accessibility and Semantic HTML</h2>
+    <article>
+        <h3>Native Elements Are Accessible by Default</h3>
+        <p>A <code>&lt;button&gt;</code> is keyboard focusable, activatable with Enter/Space, and announced as "button" to screen readers — for free. A <code>&lt;div&gt;</code> has none of these.</p>
+        <pre><code>&lt;button&gt;Save Job&lt;/button&gt;</code></pre>
+        <pre><code>&lt;div&gt;Save Job&lt;/div&gt;</code></pre>
+        <p>Tab skips the div. A screen reader hears "Save Job" with no role — no indication it is interactive.</p>
+    </article>
+    <article>
+        <h3>Semantic Landmarks Enable Navigation</h3>
+        <pre><code>&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;...&lt;/nav&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;aside&gt;...&lt;/aside&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+        <p>Screen reader users jump directly between landmarks. A <code>&lt;div&gt;</code>-only page provides none of this navigation.</p>
+    </article>
+</section>
+
+<section id="keyboard">
+    <h2>4. Keyboard Accessibility</h2>
+    <article>
+        <h3>Essential Keys</h3>
+        <ul>
+            <li><strong>Tab</strong> — move focus forward</li>
+            <li><strong>Shift+Tab</strong> — move focus backward</li>
+            <li><strong>Enter</strong> — activate link or button; submit form</li>
+            <li><strong>Space</strong> — activate button, toggle checkbox</li>
+            <li><strong>Arrow keys</strong> — navigate radio buttons and dropdowns</li>
+        </ul>
+        <p>All work on native HTML controls without JavaScript.</p>
+    </article>
+    <article>
+        <h3>Native vs div</h3>
+        <pre><code>&lt;button&gt;Apply Now&lt;/button&gt;</code></pre>
+        <p>Tab reaches it. Enter/Space activates it.</p>
+        <pre><code>&lt;div&gt;Apply Now&lt;/div&gt;</code></pre>
+        <p>Tab skips it entirely. Keyboard users can never reach it.</p>
+        <aside><p><strong>Rule:</strong> Anything possible with a mouse should also be possible with a keyboard when user input is required.</p></aside>
+    </article>
+</section>
+
+<section id="focus">
+    <h2>5. Focus Fundamentals</h2>
+    <article>
+        <h3>What Focus Means</h3>
+        <p>Focus is the state of an element when it is the current keyboard target. Only one element has focus at a time. Natively focusable: <code>&lt;a href&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>. Generic <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> are not focusable.</p>
+    </article>
+    <article>
+        <h3>Focus Order — Job Portal</h3>
+        <pre><code>Search field → Location field → Search button
+    → Job Type filter → Experience filter
+    → Job result 1 "Apply" → Job result 2 "Apply"</code></pre>
+        <p>Focus order follows document order. If HTML order and visual order differ (via CSS), keyboard navigation becomes unpredictable. Focus must never disappear unexpectedly.</p>
+    </article>
+</section>
+
+<section id="screen-readers">
+    <h2>6. Screen Readers</h2>
+    <article>
+        <h3>What Is a Screen Reader?</h3>
+        <p>Software that reads page content aloud or to braille. Used by blind and visually impaired users. Examples: NVDA, JAWS, VoiceOver, TalkBack. Processes the accessibility tree — not the visual screen.</p>
+    </article>
+    <article>
+        <h3>Semantic vs Non-Semantic</h3>
+        <p>Semantic version:</p>
+        <pre><code>&lt;main&gt;
+    &lt;h1&gt;Available Jobs&lt;/h1&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Java Developer&lt;/h2&gt;
+        &lt;p&gt;Full Time, Bangalore&lt;/p&gt;
+        &lt;button&gt;Apply Now&lt;/button&gt;
+    &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+        <p>Announced: "Main region. Heading level 1: Available Jobs. Article. Heading level 2: Java Developer. Full Time, Bangalore. Apply Now, button."</p>
+        <p>All-div version: "Available Jobs. Java Developer. Full Time, Bangalore. Apply Now." — flat text, no roles, no structure.</p>
+    </article>
+    <article>
+        <h3>Screen Reader Navigation Shortcuts (only work with semantic HTML)</h3>
+        <ul>
+            <li>H — next heading &nbsp; L — next landmark &nbsp; B — next button &nbsp; F — next form field &nbsp; T — next table</li>
+        </ul>
+    </article>
+</section>
+
+<section id="a11y-tree">
+    <h2>7. Accessibility Tree — Basic Concept</h2>
+    <article>
+        <h3>DOM vs Accessibility Tree</h3>
+        <p>The browser builds the DOM from HTML, and also the <strong>Accessibility Tree</strong> — a simplified parallel structure containing only accessibility-relevant information. Assistive technologies read the accessibility tree, not the visual screen.</p>
+    </article>
+    <article>
+        <h3>Core Properties</h3>
+        <ul>
+            <li><strong>Role</strong> — what it is: "button", "link", "heading", "text field"</li>
+            <li><strong>Name</strong> — its label: "Apply Now", "Email Address"</li>
+            <li><strong>State</strong> — condition: "checked", "disabled", "required"</li>
+            <li><strong>Value</strong> — current value: text in a field, selected option</li>
+        </ul>
+        <p>Native HTML provides all four automatically. <code>&lt;button&gt;Apply Now&lt;/button&gt;</code> = role "button", name "Apply Now".</p>
+        <aside><p><strong>Note on ARIA:</strong> ARIA adds/overrides accessibility tree properties for complex components where native HTML is insufficient. It should never replace native HTML semantics. ARIA is covered separately.</p></aside>
+    </article>
+</section>
+
+<section id="names">
+    <h2>8. Accessible Names</h2>
+    <article>
+        <h3>Sources of Accessible Names</h3>
+        <pre><code>&lt;button&gt;Apply Now&lt;/button&gt;</code></pre>
+        <p>Name from text content: "Apply Now"</p>
+        <pre><code>&lt;label for="email"&gt;Email Address&lt;/label&gt;
+&lt;input id="email" type="email"&gt;</code></pre>
+        <p>Input name from label: "Email Address"</p>
+        <pre><code>&lt;img src="logo.png" alt="ABC Technologies"&gt;</code></pre>
+        <p>Image name from alt: "ABC Technologies"</p>
+    </article>
+    <article>
+        <h3>Meaningless vs Meaningful Names</h3>
+        <pre><code>&lt;button&gt;Click&lt;/button&gt;
+&lt;button&gt;Here&lt;/button&gt;</code></pre>
+        <pre><code>&lt;button&gt;Apply for Java Developer position&lt;/button&gt;
+&lt;button&gt;View Senior React Developer job&lt;/button&gt;</code></pre>
+        <p>Screen reader users navigating by buttons hear a list of all button names. "Click, Click, Click" is useless. Descriptive names are essential.</p>
+    </article>
+</section>
+
+<section id="headings">
+    <h2>9. Headings and Accessibility</h2>
+    <article>
+        <h3>Correct Hierarchy</h3>
+        <pre><code>&lt;h1&gt;Job Portal&lt;/h1&gt;
+    &lt;h2&gt;Search Jobs&lt;/h2&gt;
+    &lt;h2&gt;Latest Jobs&lt;/h2&gt;
+        &lt;h3&gt;Java Developer&lt;/h3&gt;
+        &lt;h3&gt;React Developer&lt;/h3&gt;
+    &lt;h2&gt;Recommended for You&lt;/h2&gt;</code></pre>
+    </article>
+    <article>
+        <h3>Common Mistakes</h3>
+        <ul>
+            <li>Skipping levels: h1 → h4 (creates gaps in outline)</li>
+            <li>Multiple h1 on one page</li>
+            <li>Choosing heading level for font size instead of document structure</li>
+        </ul>
+        <aside><p><strong>Rule:</strong> Use one h1 per page. Use headings for document structure, not visual styling.</p></aside>
+    </article>
+</section>
+
+<section id="links-buttons">
+    <h2>10. Links vs Buttons</h2>
+    <article>
+        <h3>Core Mental Model</h3>
+        <ul>
+            <li><strong>Link <code>&lt;a href&gt;</code></strong> — navigates to a new location.</li>
+            <li><strong>Button <code>&lt;button&gt;</code></strong> — performs an action within the current context.</li>
+        </ul>
+        <pre><code>&lt;a href="/jobs"&gt;View All Jobs&lt;/a&gt;
+&lt;a href="/job/java-001"&gt;View Java Developer job at ABC Technologies&lt;/a&gt;</code></pre>
+        <pre><code>&lt;button&gt;Save Job&lt;/button&gt;
+&lt;button type="submit"&gt;Submit Application&lt;/button&gt;</code></pre>
+    </article>
+    <article>
+        <h3>Why This Is an Accessibility Decision</h3>
+        <p>Screen readers announce roles. A link activated with Enter navigates. A button activated with Enter or Space performs an action. Mismatching element and purpose breaks user expectations. A <code>&lt;div&gt;</code> used as either is not keyboard accessible at all.</p>
+    </article>
+</section>
+
+<section id="images">
+    <h2>11. Images and Alternative Text</h2>
+    <article>
+        <h3>Informative Images — Meaningful alt</h3>
+        <pre><code>&lt;img src="company-logo.png" alt="ABC Technologies"&gt;
+&lt;img src="java-badge.png" alt="Java Certified Developer badge"&gt;</code></pre>
+    </article>
+    <article>
+        <h3>Decorative Images — Empty alt</h3>
+        <pre><code>&lt;img src="divider.png" alt=""&gt;</code></pre>
+        <p>Empty <code>alt=""</code> tells the screen reader to skip the image.</p>
+    </article>
+    <article>
+        <h3>Common Mistakes</h3>
+        <pre><code>&lt;img src="logo.png" alt="image"&gt;
+&lt;img src="logo.png" alt="photo"&gt;
+&lt;img src="logo.png"&gt;</code></pre>
+        <p>Meaningless alt and missing alt are both failures. Always include <code>alt</code>.</p>
+    </article>
+</section>
+
+<section id="forms">
+    <h2>12. Forms and Accessibility</h2>
+    <article>
+        <h3>Correct Label Association</h3>
+        <pre><code>&lt;label for="f-email"&gt;Email Address (required)&lt;/label&gt;
+&lt;input id="f-email" name="email" type="email" required&gt;</code></pre>
+        <p>Screen reader announces: "Email Address, required, edit text."</p>
+        <pre><code>&lt;input type="text" placeholder="Enter email"&gt;</code></pre>
+        <p>Screen reader announces: "edit text." — placeholder is not an accessible name and disappears when typing begins.</p>
+    </article>
+    <article>
+        <h3>Why Input Type Matters</h3>
+        <p>Correct type communicates expected data and triggers appropriate mobile keyboards: <code>type="email"</code>, <code>type="tel"</code>, <code>type="date"</code>, <code>type="number"</code>.</p>
+    </article>
+</section>
+
+<section id="grouping">
+    <h2>13. Accessible Form Grouping</h2>
+    <article>
+        <h3>Why fieldset and legend Are Needed for Radio/Checkbox Groups</h3>
+        <p>Without a fieldset, a screen reader hears "Junior, radio button" — no context about what is being chosen.</p>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp" value="junior" required&gt; Junior (0–2 years)&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp" value="mid"&gt; Mid-Level (3–5 years)&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="exp" value="senior"&gt; Senior (6+ years)&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+        <p>Screen reader announces: "Experience Level group. Junior, radio button, 1 of 3."</p>
+    </article>
+</section>
+
+<section id="tables">
+    <h2>14. Accessible Tables</h2>
+    <article>
+        <h3>Tables for Tabular Data Only — Never for Layout</h3>
+        <pre><code>&lt;table&gt;
+    &lt;caption&gt;Available Jobs&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Job Title&lt;/th&gt;
+            &lt;th scope="col"&gt;Company&lt;/th&gt;
+            &lt;th scope="col"&gt;Location&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Java Developer&lt;/td&gt;
+            &lt;td&gt;ABC Technologies&lt;/td&gt;
+            &lt;td&gt;Bangalore&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;React Developer&lt;/td&gt;
+            &lt;td&gt;XYZ Solutions&lt;/td&gt;
+            &lt;td&gt;Remote&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+        <ul>
+            <li><code>&lt;caption&gt;</code> — accessible name for the table</li>
+            <li><code>&lt;th scope="col"&gt;</code> — column headers; screen readers announce them when reading data cells</li>
+            <li><code>&lt;thead&gt;</code> / <code>&lt;tbody&gt;</code> — separate headers from data</li>
+        </ul>
+    </article>
+</section>
+
+<section id="language">
+    <h2>15. Language and Document Metadata</h2>
+    <article>
+        <h3>lang Attribute</h3>
+        <pre><code>&lt;html lang="en"&gt;</code></pre>
+        <p>Screen readers use <code>lang</code> to select correct pronunciation. Wrong language = incomprehensible speech. For inline language changes: <code>&lt;p lang="ta"&gt;...&lt;/p&gt;</code></p>
+    </article>
+    <article>
+        <h3>Page Title</h3>
+        <pre><code>&lt;title&gt;Senior Java Developer Jobs — Job Portal&lt;/title&gt;</code></pre>
+        <p>First thing a screen reader announces on page load. Helps users with multiple tabs open.</p>
+        <p>Poor: <code>&lt;title&gt;Page&lt;/title&gt;</code></p>
+    </article>
+    <article>
+        <h3>charset and viewport</h3>
+        <pre><code>&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+        <p>charset ensures international characters are encoded correctly. viewport ensures correct mobile scaling — essential for motor-impaired users on touch devices.</p>
+    </article>
+</section>
+
+<section id="content">
+    <h2>16. Accessible Content</h2>
+    <article>
+        <h3>Meaningful Link Text</h3>
+        <pre><code>&lt;a href="/job/123"&gt;Click here&lt;/a&gt;</code></pre>
+        <pre><code>&lt;a href="/job/123"&gt;View Senior Java Developer job at ABC Technologies&lt;/a&gt;</code></pre>
+        <p>Screen reader users navigate by links — they hear a list of all link names. "Click here" three times is meaningless.</p>
+    </article>
+    <article>
+        <h3>Clear Instructions</h3>
+        <p>Do not rely on colour alone: "Fields in red are required" fails for colour-blind users.</p>
+        <p>Use text: "Fields marked (required) must be completed."</p>
+    </article>
+    <article>
+        <h3>Consistent Structure</h3>
+        <p>Navigation in the same position on every page. Buttons with the same purpose labelled consistently. Predictability benefits cognitive disability users and everyone else.</p>
+    </article>
+</section>
+
+<section id="native">
+    <h2>17. Native HTML First</h2>
+    <article>
+        <h3>Use Native HTML Before Custom Solutions</h3>
+        <table>
+            <caption>Native HTML — correct elements for common needs</caption>
+            <thead>
+                <tr><th scope="col">Need</th><th scope="col">Use</th><th scope="col">Not</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Action button</td><td><code>&lt;button&gt;</code></td><td><code>&lt;div onclick&gt;</code></td></tr>
+                <tr><td>Navigation link</td><td><code>&lt;a href&gt;</code></td><td><code>&lt;div onclick&gt;</code></td></tr>
+                <tr><td>Toggle option</td><td><code>&lt;input type="checkbox"&gt;</code></td><td>custom div</td></tr>
+                <tr><td>Single selection</td><td><code>&lt;input type="radio"&gt;</code></td><td>custom div</td></tr>
+                <tr><td>Page title</td><td><code>&lt;h1&gt;</code></td><td><code>&lt;div class="title"&gt;</code></td></tr>
+                <tr><td>Navigation area</td><td><code>&lt;nav&gt;</code></td><td><code>&lt;div class="nav"&gt;</code></td></tr>
+                <tr><td>Main content</td><td><code>&lt;main&gt;</code></td><td><code>&lt;div class="main"&gt;</code></td></tr>
+                <tr><td>Field description</td><td><code>&lt;label&gt;</code></td><td><code>&lt;div class="label"&gt;</code></td></tr>
+                <tr><td>Dropdown</td><td><code>&lt;select&gt;</code></td><td>custom div dropdown</td></tr>
+            </tbody>
+        </table>
+        <aside><p><strong>On ARIA:</strong> ARIA is for complex components with no native HTML equivalent. Using <code>&lt;button&gt;</code> is always better than <code>&lt;div role="button"&gt;</code>.</p></aside>
+    </article>
+</section>
+
+<section id="mistakes">
+    <h2>18. Common Accessibility Mistakes</h2>
+
+    <article>
+        <h3>1. Missing Label</h3>
+        <pre><code>&lt;input type="email" name="email"&gt;</code></pre>
+        <pre><code>&lt;label for="m1"&gt;Email Address&lt;/label&gt;
+&lt;input id="m1" type="email" name="email"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>2. Placeholder Instead of Label</h3>
+        <pre><code>&lt;input type="email" placeholder="Email Address"&gt;</code></pre>
+        <pre><code>&lt;label for="m2"&gt;Email Address&lt;/label&gt;
+&lt;input id="m2" type="email" name="email" placeholder="you@example.com"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>3. div as Button</h3>
+        <pre><code>&lt;div&gt;Apply Now&lt;/div&gt;</code></pre>
+        <pre><code>&lt;button&gt;Apply Now&lt;/button&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>4. div as Link</h3>
+        <pre><code>&lt;div&gt;View Jobs&lt;/div&gt;</code></pre>
+        <pre><code>&lt;a href="/jobs"&gt;View Jobs&lt;/a&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>5. Missing alt</h3>
+        <pre><code>&lt;img src="logo.png"&gt;</code></pre>
+        <pre><code>&lt;img src="logo.png" alt="ABC Technologies"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>6. Meaningless alt</h3>
+        <pre><code>&lt;img src="logo.png" alt="image"&gt;</code></pre>
+        <pre><code>&lt;img src="logo.png" alt="ABC Technologies company logo"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>7. Skipped Heading Levels</h3>
+        <pre><code>&lt;h1&gt;Job Portal&lt;/h1&gt;
+&lt;h4&gt;Latest Jobs&lt;/h4&gt;</code></pre>
+        <pre><code>&lt;h1&gt;Job Portal&lt;/h1&gt;
+&lt;h2&gt;Latest Jobs&lt;/h2&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>8. Unclear Link Text</h3>
+        <pre><code>&lt;a href="/job/123"&gt;Click here&lt;/a&gt;</code></pre>
+        <pre><code>&lt;a href="/job/123"&gt;View Java Developer job at ABC Technologies&lt;/a&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>9. Radio Buttons Without fieldset/legend</h3>
+        <pre><code>&lt;div&gt;
+    &lt;p&gt;Experience Level&lt;/p&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>10. Missing lang</h3>
+        <pre><code>&lt;html&gt;</code></pre>
+        <pre><code>&lt;html lang="en"&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>11. Table Used for Layout</h3>
+        <pre><code>&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/td&gt;&lt;td&gt;&lt;main&gt;...&lt;/main&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre>
+        <pre><code>&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;...&lt;/nav&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+    </article>
+
+    <article>
+        <h3>12. Non-Semantic HTML When Semantic Exists</h3>
+        <pre><code>&lt;div class="nav"&gt;&lt;div&gt;&lt;a href="/jobs"&gt;Jobs&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+        <pre><code>&lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/jobs"&gt;Jobs&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;</code></pre>
+    </article>
+</section>
+
+<section id="testing">
+    <h2>19. Accessibility Testing Fundamentals</h2>
+    <article>
+        <h3>Keyboard Testing</h3>
+        <p>Put the mouse aside. Navigate the entire page with Tab, Shift+Tab, Enter, Space, and arrows. Verify every interactive element is reachable and operable. <strong>Detects:</strong> missing keyboard access, broken focus order, focus loss. <strong>Cannot detect:</strong> screen reader announcements, missing labels.</p>
+    </article>
+    <article>
+        <h3>Screen Reader Testing</h3>
+        <p>Use NVDA+Firefox (Windows) or VoiceOver+Safari (macOS). Navigate by headings, landmarks, links, buttons. Verify announcements are meaningful. <strong>Detects:</strong> missing names, incorrect roles, broken form associations. <strong>Cannot detect:</strong> visual-only issues.</p>
+    </article>
+    <article>
+        <h3>Automated Tools</h3>
+        <p>Tools like axe-core, Lighthouse, WAVE catch ~30–40% of accessibility issues — missing alt, missing labels, heading order, lang attribute. <strong>Cannot detect:</strong> whether label text is meaningful, logical keyboard order, usability in practice. Manual testing is always required.</p>
+    </article>
+    <article>
+        <h3>Browser Accessibility Inspector</h3>
+        <p>Modern browser DevTools show the accessibility tree, computed accessible names, roles, and states for any element — invaluable for verifying that HTML produces correct accessibility information.</p>
+    </article>
+</section>
+
+<section id="wcag">
+    <h2>20. WCAG — Introduction</h2>
+    <article>
+        <h3>What Is WCAG?</h3>
+        <p>Web Content Accessibility Guidelines — the international standard for web accessibility published by the W3C. Most legal requirements target WCAG 2.1 Level AA. Organised into three levels: A (minimum), AA (standard), AAA (enhanced).</p>
+    </article>
+    <article>
+        <h3>The Four Principles — POUR</h3>
+        <ul>
+            <li>
+                <strong>Perceivable</strong> — content must be presentable in ways users can perceive.
+                Images need alt text. Videos need captions. Content must not rely on colour alone.
+                <br>HTML example: <code>&lt;img src="badge.png" alt="Java Certified Developer"&gt;</code>
+            </li>
+            <li>
+                <strong>Operable</strong> — all functionality must be operable by keyboard and without causing seizures.
+                <br>HTML example: <code>&lt;button&gt;</code> instead of <code>&lt;div onclick&gt;</code>.
+            </li>
+            <li>
+                <strong>Understandable</strong> — content must be readable and predictable.
+                Declare language. Consistent navigation. Helpful error messages.
+                <br>HTML example: <code>&lt;html lang="en"&gt;</code>, meaningful form labels.
+            </li>
+            <li>
+                <strong>Robust</strong> — content must work with current and future assistive technologies.
+                Use valid HTML. Use semantic elements.
+                <br>HTML example: <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;h1&gt;–&lt;h6&gt;</code> instead of <code>&lt;div&gt;</code> for everything.
+            </li>
+        </ul>
+    </article>
+</section>
+
+<section id="job-portal">
+    <h2>21. Accessible Job Portal Example</h2>
+    <p>This example demonstrates all fundamental accessibility concepts.</p>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Find Jobs — Job Portal&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;header&gt;
+    &lt;h1&gt;Job Portal&lt;/h1&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/jobs"&gt;Browse Jobs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/companies"&gt;Companies&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/login"&gt;Sign In&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Search Jobs&lt;/h2&gt;
+        &lt;form action="/jobs" method="get"&gt;
+            &lt;label for="keyword"&gt;Job Title or Skill&lt;/label&gt;
+            &lt;input id="keyword" type="search" name="keyword"
+                placeholder="e.g. Java Developer"&gt;
+
+            &lt;label for="location"&gt;Location&lt;/label&gt;
+            &lt;input id="location" type="text" name="location"
+                placeholder="e.g. Bangalore, Remote"&gt;
+
+            &lt;button type="submit"&gt;Search Jobs&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;Latest Jobs&lt;/h2&gt;
+
+        &lt;article&gt;
+            &lt;h3&gt;Senior Java Developer&lt;/h3&gt;
+            &lt;p&gt;&lt;img src="abc-logo.png" alt="ABC Technologies"&gt; Full Time &amp;mdash; Bangalore&lt;/p&gt;
+            &lt;a href="/job/senior-java-developer-abc"&gt;View Senior Java Developer job at ABC Technologies&lt;/a&gt;
+        &lt;/article&gt;
+
+        &lt;article&gt;
+            &lt;h3&gt;React Developer&lt;/h3&gt;
+            &lt;p&gt;&lt;img src="xyz-logo.png" alt="XYZ Solutions"&gt; Contract &amp;mdash; Remote&lt;/p&gt;
+            &lt;a href="/job/react-developer-xyz"&gt;View React Developer job at XYZ Solutions&lt;/a&gt;
+        &lt;/article&gt;
+    &lt;/section&gt;
+
+    &lt;aside&gt;
+        &lt;h2&gt;Related Searches&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/jobs?skill=spring-boot"&gt;Spring Boot Jobs&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/jobs?skill=nodejs"&gt;Node.js Jobs&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Job Portal&lt;/p&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="/about"&gt;About Us&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="/privacy"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</section>
+
+<section id="before-after">
+    <h2>22. Before vs After Accessibility</h2>
+
+    <article>
+        <h3>1. Page Header</h3>
+        <pre><code>&lt;div class="header"&gt;&lt;div class="logo"&gt;Job Portal&lt;/div&gt;&lt;/div&gt;</code></pre>
+        <pre><code>&lt;header&gt;&lt;h1&gt;Job Portal&lt;/h1&gt;&lt;/header&gt;</code></pre>
+    </article>
+    <article>
+        <h3>2. Navigation</h3>
+        <pre><code>&lt;div class="nav"&gt;&lt;div&gt;Jobs&lt;/div&gt;&lt;div&gt;Companies&lt;/div&gt;&lt;/div&gt;</code></pre>
+        <pre><code>&lt;nav&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="/jobs"&gt;Jobs&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="/companies"&gt;Companies&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/nav&gt;</code></pre>
+    </article>
+    <article>
+        <h3>3. Button</h3>
+        <pre><code>&lt;div class="btn"&gt;Apply Now&lt;/div&gt;</code></pre>
+        <pre><code>&lt;button&gt;Apply Now&lt;/button&gt;</code></pre>
+    </article>
+    <article>
+        <h3>4. Link</h3>
+        <pre><code>&lt;span&gt;View Job&lt;/span&gt;</code></pre>
+        <pre><code>&lt;a href="/job/java-001"&gt;View Senior Java Developer job at ABC Technologies&lt;/a&gt;</code></pre>
+    </article>
+    <article>
+        <h3>5. Form Field Without Label</h3>
+        <pre><code>&lt;input type="text" placeholder="Full Name"&gt;</code></pre>
+        <pre><code>&lt;label for="ba-name"&gt;Full Name&lt;/label&gt;
+&lt;input id="ba-name" type="text" name="full_name"&gt;</code></pre>
+    </article>
+    <article>
+        <h3>6. Radio Without Group Context</h3>
+        <pre><code>&lt;div&gt;&lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;&lt;/div&gt;</code></pre>
+        <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Experience Level&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="level" value="junior"&gt; Junior&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+    </article>
+    <article>
+        <h3>7. Image Without alt</h3>
+        <pre><code>&lt;img src="company.png"&gt;</code></pre>
+        <pre><code>&lt;img src="company.png" alt="ABC Technologies"&gt;</code></pre>
+    </article>
+    <article>
+        <h3>8. Unclear Link Text</h3>
+        <pre><code>&lt;a href="/job/456"&gt;Click here&lt;/a&gt;</code></pre>
+        <pre><code>&lt;a href="/job/456"&gt;View React Developer job at XYZ Solutions&lt;/a&gt;</code></pre>
+    </article>
+    <article>
+        <h3>9. Missing lang</h3>
+        <pre><code>&lt;html&gt;</code></pre>
+        <pre><code>&lt;html lang="en"&gt;</code></pre>
+    </article>
+    <article>
+        <h3>10. Vague Page Title</h3>
+        <pre><code>&lt;title&gt;Page&lt;/title&gt;</code></pre>
+        <pre><code>&lt;title&gt;Senior Java Developer Jobs — Job Portal&lt;/title&gt;</code></pre>
+    </article>
+</section>
+
+<section id="senior">
+    <h2>23. Senior Frontend Accessibility Perspective</h2>
+    <article>
+        <h3>Accessibility During Design, Not After</h3>
+        <p>Retrofitting accessibility is expensive and incomplete. A senior developer raises concerns during design review and code review — not as a separate end-of-project phase.</p>
+    </article>
+    <article>
+        <h3>Semantic HTML Is the Foundation</h3>
+        <p>ARIA, JavaScript enhancements, and custom components are built on top of semantic HTML — not instead of it. Every accessibility improvement built on non-semantic HTML requires more code and is harder to maintain.</p>
+    </article>
+    <article>
+        <h3>Native Controls First</h3>
+        <p>A native <code>&lt;select&gt;</code> is accessible on every browser without a line of JavaScript. A custom dropdown requires significant ARIA and JavaScript to reach the same level — and most implementations never fully achieve it.</p>
+    </article>
+    <article>
+        <h3>Keyboard Accessibility Is Not Optional</h3>
+        <p>A senior developer treats keyboard inaccessibility as a bug. Every interactive element must be keyboard reachable and operable — including dynamically added content.</p>
+    </article>
+    <article>
+        <h3>Automated Tools Find ~30–40% of Issues</h3>
+        <p>They cannot detect whether a label is meaningful, whether keyboard navigation is logical, or whether a form is actually usable. Manual testing is required.</p>
+    </article>
+    <article>
+        <h3>Accessibility Is a Quality Attribute</h3>
+        <p>In the same category as performance, security, and maintainability. A frontend application that excludes a significant portion of users is not a high-quality application.</p>
+    </article>
+    <article>
+        <h3>Accessibility and Usability Improve Each Other</h3>
+        <p>Solving accessibility problems frequently improves the experience for all users. Clear headings help screen reader users navigate — and help sighted users scan. Accessible forms are clearer for everyone.</p>
+    </article>
+</section>
+
+<section id="interview">
+    <h2>24. Interview Questions</h2>
+
+    <section>
+        <h3>Beginner</h3>
+
+        <details>
+            <summary>What is web accessibility?</summary>
+            <p>Web accessibility means designing and building websites so people with disabilities — visual, auditory, motor, cognitive — can use them effectively. It also benefits people with temporary limitations and situational constraints. The goal is to remove barriers that prevent people from perceiving, understanding, navigating, and interacting with the web.</p>
+        </details>
+
+        <details>
+            <summary>Why is accessibility important?</summary>
+            <p>It ensures websites are usable by the widest possible audience. It improves usability for all users, is required by law in many jurisdictions, and is a quality attribute of professional frontend work. Solving accessibility problems often improves the experience for everyone.</p>
+        </details>
+
+        <details>
+            <summary>What is semantic HTML?</summary>
+            <p>Using elements that carry meaning about the content they contain — <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>. The element name communicates its role and purpose to browsers, assistive technologies, and developers.</p>
+        </details>
+
+        <details>
+            <summary>What is a screen reader?</summary>
+            <p>Software that reads page content aloud or to braille. Used by blind and visually impaired users. Processes the accessibility tree — not the visual appearance. Examples: NVDA, JAWS, VoiceOver, TalkBack.</p>
+        </details>
+
+        <details>
+            <summary>What is keyboard accessibility?</summary>
+            <p>All interactive functionality can be reached and operated using only a keyboard — Tab/Shift+Tab to navigate, Enter/Space to activate, arrows to select. Essential for motor-impaired users, voice control users, and keyboard power users.</p>
+        </details>
+    </section>
+
+    <section>
+        <h3>Intermediate</h3>
+
+        <details>
+            <summary>Why should native HTML elements be preferred?</summary>
+            <p>Native elements provide keyboard accessibility, correct roles, correct states, and correct behaviours without JavaScript. A <code>&lt;button&gt;</code> is focusable, activatable with Enter/Space, and announced as "button" automatically. Recreating this with a <code>&lt;div&gt;</code> requires significant JavaScript and is difficult to implement fully correctly.</p>
+        </details>
+
+        <details>
+            <summary>Why is button better than a clickable div?</summary>
+            <p>A <code>&lt;button&gt;</code> is natively keyboard focusable, activatable with Enter and Space, and announced as "button" by screen readers. A <code>&lt;div&gt;</code> is not focusable, has no role, and is not interactive. Keyboard-only users cannot reach or activate a clickable div.</p>
+        </details>
+
+        <details>
+            <summary>Why are labels important?</summary>
+            <p>Labels provide the accessible name for form controls. Without a label, a screen reader hears "edit text" with no description when focusing an input. Labels also enlarge the click/tap target, benefiting all users.</p>
+        </details>
+
+        <details>
+            <summary>Why is alt important?</summary>
+            <p>alt provides a text alternative for images. Screen readers read it instead of the image. Without alt, a screen reader may read the file name or announce "image" with no description. Decorative images should have <code>alt=""</code> to be skipped.</p>
+        </details>
+
+        <details>
+            <summary>What is the purpose of fieldset and legend?</summary>
+            <p><code>&lt;fieldset&gt;</code> groups related form controls into a logical unit. <code>&lt;legend&gt;</code> provides the group's name. Together they give radio buttons and checkboxes the group context that individual labels cannot provide — "Experience Level: Junior / Mid / Senior" instead of just "Junior" with no context.</p>
+        </details>
+
+        <details>
+            <summary>Why is heading hierarchy important?</summary>
+            <p>Screen reader users navigate by headings to scan pages. A logical h1→h2→h3 hierarchy creates a meaningful outline. Skipped levels create gaps. Multiple h1 elements confuse the page structure. Headings chosen for font size rather than structure produce a meaningless outline.</p>
+        </details>
+
+        <details>
+            <summary>Link vs button — when to use each?</summary>
+            <p>Link — navigates to a new location (different page, section, external resource). Button — performs an action in the current context (submit, save, delete, expand). Mismatching element and purpose breaks screen reader announcements and keyboard behaviour.</p>
+        </details>
+
+        <details>
+            <summary>Why is lang important?</summary>
+            <p>Screen readers use <code>lang</code> to select the correct pronunciation rules and voice profile. Without it, a screen reader may read an English page in the wrong language voice, producing incomprehensible speech for users whose system language differs from the page language.</p>
+        </details>
+    </section>
+
+    <section>
+        <h3>Advanced</h3>
+
+        <details>
+            <summary>What is the accessibility tree?</summary>
+            <p>A simplified parallel structure the browser builds from the DOM containing only accessibility-relevant information. Assistive technologies read from the accessibility tree via the OS Accessibility API — not from the visual screen. Semantic HTML produces a well-structured accessibility tree automatically. Generic divs contribute little to it.</p>
+        </details>
+
+        <details>
+            <summary>What is an accessible name?</summary>
+            <p>The human-readable label identifying an element in the accessibility tree — what a screen reader announces when focus reaches it. Sources: button text content, label element, alt attribute, caption element. Every interactive element must have a meaningful accessible name.</p>
+        </details>
+
+        <details>
+            <summary>How does semantic HTML help assistive technologies?</summary>
+            <p>Semantic elements map to accessibility roles automatically. <code>&lt;button&gt;</code> = role "button". <code>&lt;nav&gt;</code> = landmark "navigation". <code>&lt;h2&gt;</code> = heading level 2. This mapping enables screen reader navigation shortcuts, correct announcements, and predictable keyboard behaviour — all without any JavaScript or ARIA.</p>
+        </details>
+
+        <details>
+            <summary>What can automated accessibility testing detect?</summary>
+            <p>Approximately 30–40% of issues. Detectable: missing alt text, missing labels, incorrect heading order, missing lang attribute, colour contrast failures, some ARIA errors. Not detectable: whether alt text is meaningful, whether keyboard navigation is logical, whether a form is usable in practice, context-dependent issues.</p>
+        </details>
+
+        <details>
+            <summary>Why is manual accessibility testing still required?</summary>
+            <p>Automated tools cannot assess meaning, logic, or usability. A page that passes all automated checks can still be severely inaccessible. Only a human (using keyboard testing, screen reader testing, and cognitive review) can verify that the page is actually usable.</p>
+        </details>
+
+        <details>
+            <summary>What is WCAG?</summary>
+            <p>Web Content Accessibility Guidelines — the international standard published by the W3C. Defines specific success criteria for web accessibility organised into three conformance levels: A (minimum), AA (standard target for most legal requirements), AAA (enhanced). Most laws and organisational standards require WCAG 2.1 Level AA.</p>
+        </details>
+
+        <details>
+            <summary>What does POUR mean?</summary>
+            <p>The four WCAG principles: <strong>Perceivable</strong> (content presentable to all senses — alt text, captions), <strong>Operable</strong> (keyboard accessible, no seizure-inducing content), <strong>Understandable</strong> (readable language, predictable behaviour, helpful errors), <strong>Robust</strong> (valid HTML, compatible with current and future assistive technologies). A website must satisfy all four.</p>
+        </details>
+
+        <details>
+            <summary>How would you make a complex Job Portal accessible?</summary>
+            <p>Start with semantic HTML — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;footer&gt;</code>. Use <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code> with a logical hierarchy. Label every form control. Group radio/checkbox with fieldset/legend. Use <code>&lt;button&gt;</code> for actions and <code>&lt;a href&gt;</code> for navigation. Add meaningful alt to images. Declare lang. Provide meaningful page titles and link text. Test with keyboard and screen reader. Use automated tools to catch remaining issues. Validate on the server regardless of client-side state.</p>
+        </details>
+
+        <details>
+            <summary>How would you approach accessibility in a large React application?</summary>
+            <p>The fundamentals are the same regardless of framework. Use native HTML elements wherever possible — React renders real HTML. Use semantic elements for structure. Ensure every form control has a label. Manage focus explicitly when content changes dynamically (modal opens, route changes). Test with keyboard and screen reader. Use axe-core in the test suite. Treat accessibility failures as bugs with the same priority as functional bugs. ARIA is needed only for complex interactive components — tabs, comboboxes, modals — where no native element exists.</p>
+        </details>
+    </section>
+</section>
+
+<section id="checklist">
+    <h2>25. Final Accessibility Checklist</h2>
+    <p>Check each item when you are confident you understand it:</p>
+    <ul>
+        <li>Understand what web accessibility means and who it benefits</li>
+        <li>Understand why accessibility matters for UX, code quality, and legal compliance</li>
+        <li>Understand how semantic HTML provides accessibility for free</li>
+        <li>Understand keyboard accessibility — Tab, Enter, Space, arrows</li>
+        <li>Understand focus — what it is, focus order, why it must not disappear</li>
+        <li>Understand screen readers — how they process page structure</li>
+        <li>Understand the accessibility tree — role, name, state, value</li>
+        <li>Understand accessible names — from text content, labels, alt, caption</li>
+        <li>Use proper heading hierarchy — one h1, logical h1→h2→h3</li>
+        <li>Know link vs button — navigate vs act</li>
+        <li>Understand image alt text — informative vs decorative</li>
+        <li>Create accessible forms — labels, correct types, required indicators</li>
+        <li>Use fieldset and legend for radio and checkbox groups</li>
+        <li>Understand accessible tables — caption, th, scope</li>
+        <li>Declare lang on the html element</li>
+        <li>Write meaningful page titles and link text</li>
+        <li>Prefer native HTML controls over custom div-based solutions</li>
+        <li>Recognise and avoid the 12 common accessibility mistakes</li>
+        <li>Understand keyboard testing, screen reader testing, and automated testing</li>
+        <li>Understand WCAG and the POUR principles</li>
+        <li>Build an accessible HTML page that demonstrates all fundamentals</li>
+    </ul>
+    <aside>
+        <p><strong>You are ready for the ARIA topic when</strong> you can build the Job Portal example in Section 21 from memory, explain why each element was chosen, navigate the page by keyboard, and describe what a screen reader would announce at each step.</p>
+    </aside>
+</section>
+
+</main>
+
+<footer>
+    <p>Web Accessibility Fundamentals &mdash; Frontend Learning Hub</p>
+    <address>Part of the Frontend Learning Hub series.</address>
+    <p><a href="#what-is">Back to top</a></p>
+</footer>
+
+</body>
+</html>
